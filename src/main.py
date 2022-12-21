@@ -1,10 +1,15 @@
 import argparse, os, re
+# from get_hint import genHint
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Treasure Island')
     parser.add_argument('--read', type=str, default='data/input/', help='Input file directory')
+    parser.add_argument('--gen_map', type=bool, default=False, help='Generating map')
     
     args = parser.parse_args()
+    
+    if args.gen_map:
+        pass
     
     inputFolder = args.read
     
