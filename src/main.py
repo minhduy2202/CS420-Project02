@@ -1,4 +1,5 @@
 import argparse, os, re
+from preprocessing import preprocessing
 # from get_hint import genHint
 
 if __name__ == '__main__':
@@ -30,14 +31,27 @@ if __name__ == '__main__':
             print(f'Solving map {testNum}')
             
             ## Input
-            mapSize = [int(item) for item in f.readline().split()] # contain weight and height
+            mapSize = [int(item) for item in f.readline().split()] # contain width and height
             revealRound = int(f.readline()) # defines the round number that the pirate reveal location
             freeRound = int(f.readline()) # defines the round number that the pirate is free
             numOfRegions = int(f.readline()) # defines the number of regions
-            treasureLocation = [int(item) for item in f.readline().split()]
+            treasure = [int(item) for item in f.readline().split()]
+            treasure = treasure[0] * mapSize[0] + treasure[1]
             _map = []
             
             for i in range(mapSize[1]):
                 _map.append(f.readline().replace(' ', '').replace('\n', '').split(';'))
                 
-            print(_map)
+            f.close()
+
+        agent, pirate, path = preprocessing(mapSize[0], mapSize[1], _map)
+        if pirate == -1:
+            print("There does not exist any path from the prisons to treasure.")
+            continue
+        
+        round = 1
+        kBase = []
+        hints = []
+        
+        while True:
+            
