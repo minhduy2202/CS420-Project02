@@ -1,6 +1,7 @@
 import argparse, os, re
 from preprocessing import preprocessing
 # from get_hint import genHint
+from get_map import genMap
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Treasure Island')
@@ -8,9 +9,10 @@ if __name__ == '__main__':
     parser.add_argument('--gen_map', type=bool, default=False, help='Generating map')
     
     args = parser.parse_args()
-    
+
+    # python3 main.py --gen_map True
     if args.gen_map:
-        pass
+        map_gen, numOfRegions_gen, treasure_gen, agentLocation_gen, pirateLocation_gen = genMap(15, 15, numOfRegions=6, dataFolder=args.read)
     
     inputFolder = args.read
     
@@ -27,6 +29,7 @@ if __name__ == '__main__':
     for file in os.listdir(inputFolder):
         if not re.match(inputFilePattern, file): continue
         testNum = file[4:-4]
+
         with open(os.path.join(inputFolder, file), 'r') as f:
             print(f'Solving map {testNum}')
             
@@ -41,10 +44,17 @@ if __name__ == '__main__':
             
             for i in range(mapSize[1]):
                 _map.append(f.readline().replace(' ', '').replace('\n', '').split(';'))
-                
+            
+
+            if args.gen_map:
+                mapSize = [len(map_gen[0]), len(map_gen)]
+                numOfRegions = numOfRegions_gen
+                treasure = treasure_gen[0] * mapSize[0] + treasure_gen[1]
+                _map = map_gen
+            
             f.close()
 
-        agent, pirate, path = preprocessing(mapSize[0], mapSize[1], _map)
+        agent, pirate, path = preprocessing(mapSize[0], mapSize[1], treasure, _map)
         if pirate == -1:
             print("There does not exist any path from the prisons to treasure.")
             continue
@@ -53,5 +63,4 @@ if __name__ == '__main__':
         kBase = []
         hints = []
         
-        while True:
-            
+        # while True:
