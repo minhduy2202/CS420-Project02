@@ -65,4 +65,14 @@ if __name__ == '__main__':
         removedTiles = set()
         
         while True:
-            
+            if round == revealRound:
+                # adjust hint probability
+                pass
+            if round == freeRound:
+                # free pirate
+                pass
+            # getHint
+            # getActions
+            # applyActions
+            # Pirate moves if free
+            # check finish

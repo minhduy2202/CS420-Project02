@@ -99,3 +99,4 @@ def genMap(_h: int, _w: int, numOfRegions: int, dataFolder: str):
     return myMap, numOfRegions, treasureLocation, agentLocation, pirateLocation
 
 # print(genMap(20, 20, 9, "data/input/"))
+genMap(8, 8, 4, "data/input/")

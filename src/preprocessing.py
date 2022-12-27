@@ -17,8 +17,8 @@ def preprocessing(_w: int, _h: int, _treasure: int, _map: list):
         agent = random.randrange(_w * _h)
     
     pirates = []
-    for i in range(_w):
-        for j in range(_h):
+    for i in range(_h):
+        for j in range(_w):
             if "P" in _map[i][j]:
                 pirates.append(i * _w + j)
                 
@@ -30,22 +30,17 @@ def preprocessing(_w: int, _h: int, _treasure: int, _map: list):
         while queue:
             path = queue.pop(0)
             
-            if path[-1] == _treasure: return (agent, pirate, path)
+            if path[-1] == _treasure: return (agent, pirate, path[:-1:2] + ([path[-1]] if len(path) % 2 == 0 else []))
             
-            check = [False] * 4
-            adjacent = [-1, 1, -_w, _w, -2, 2, -2*_w, 2*_w]
-            for i in range(8):
+            # check = [False] * 4
+            adjacent = [-1, 1, -_w, _w]
+            for i in range(4):
                 cell = path[-1] + adjacent[i]
                 if cell < 0 or cell >= _w * _h: continue
                 if cell in explored: continue
-                if 'M' in _map[cell // _w][cell % _w] or '0' in _map[cell // _w][cell % _w]: 
-                    if i < 4: check[i] = True
-                    continue
-                if i >= 4 and check[i - 4]: continue
+                if 'M' in _map[cell // _w][cell % _w] or '0' in _map[cell // _w][cell % _w]: continue
                 
                 queue.append(path + [cell])
                 explored.append(cell)
                 
     return (agent, -1, [])
-
-print(preprocessing(5, 5, 19, [['0', '0', '0', '0', '0'], ['0', '1', '1M', '1P', '1'], ['0', '1P', '2M', '2', '2'], ['0', '3', '3M', '3', '3'], ['0', '0', '0', '0', '0']]))

@@ -35,8 +35,8 @@ def genHint(_w: int, _h: int, _numOfRegions: int, _treasureLocation: int, _pirat
         
         listOfTiles = []
         
-        for i in range(_w):
-            for j in range(_h):
+        for i in range(_h):
+            for j in range(_w):
                 if int(_map[i][j][0]) in listOfRegions: listOfTiles.append(i * _w + j)
         
         isTruth = _treasureLocation in listOfTiles
@@ -48,8 +48,8 @@ def genHint(_w: int, _h: int, _numOfRegions: int, _treasureLocation: int, _pirat
         
         listOfTiles = []
         
-        for i in range(_w):
-            for j in range(_h):
+        for i in range(_h):
+            for j in range(_w):
                 if int(_map[i][j][0]) in listOfRegions: listOfTiles.append(i * _w + j)
         
         isTruth = _treasureLocation not in listOfTiles
@@ -88,8 +88,8 @@ def genHint(_w: int, _h: int, _numOfRegions: int, _treasureLocation: int, _pirat
         
         isTruth = (abs(_treasureLocation // _w - _agentLocation // _w) + abs(_treasureLocation % _w - _agentLocation % _w)) < (abs(_treasureLocation // _w - _pirateLocation // _w) + abs(_treasureLocation % _w - _pirateLocation % _w))
         
-        for i in range(_w):
-            for j in range(_h):
+        for i in range(_h):
+            for j in range(_w):
                 if (abs(i - _agentLocation // _w) + abs(j - _agentLocation % _w)) < (abs(i - _pirateLocation // _w) + abs(j - _pirateLocation % _w)):
                     listOfTiles.add(i * _w + j)
                     
@@ -118,12 +118,12 @@ def genHint(_w: int, _h: int, _numOfRegions: int, _treasureLocation: int, _pirat
             s = f"Row {r} contains the treasure."
             isTruth = (r == _treasureLocation // _w)
             
-            for j in range(_h): listOfTiles.append(r  * _w + j)
+            for j in range(_w): listOfTiles.append(r  * _w + j)
         else: 
             s = f"Column {c} contains the treasure."
             isTruth = (c == _treasureLocation % _w)
             
-            for i in range(_w): listOfTiles.append(i * _w + c)
+            for i in range(_h): listOfTiles.append(i * _w + c)
         
         return (hint, listOfTiles, isTruth, s)
     elif hint == 9: # "A column and/or a row that don't contain the treasure.",
@@ -149,20 +149,20 @@ def genHint(_w: int, _h: int, _numOfRegions: int, _treasureLocation: int, _pirat
             s = f"Row {r} does not contain the treasure."
             isTruth = (r != _treasureLocation // _w)
             
-            for j in range(_h): listOfTiles.append(r  * _w + j)
+            for j in range(_w): listOfTiles.append(r  * _w + j)
         else: 
             s = f"Column {c} does not contain the treasure."
             isTruth = (c != _treasureLocation % _w)
             
-            for i in range(_w): listOfTiles.append(i * _w + c)
+            for i in range(_h): listOfTiles.append(i * _w + c)
             
         return (hint, listOfTiles, isTruth, s)
     elif hint == 10: # "The treasure is somewhere in the boundary of 2 regions ?.",
         adjacent = [(-1, 0), (1, 0), (0, 1), (0, - 1)]
         regionPairs = dict()
         
-        for i in range(_w):
-            for j in range(_h):
+        for i in range(_h):
+            for j in range(_w):
                 for tup in adjacent:
                     if i + tup[0] >= 0 and i + tup[0] < _w and j + tup[1] >= 0 and j + tup[1] < _h:
                         region_1 = int(_map[i][j][0])
@@ -188,8 +188,8 @@ def genHint(_w: int, _h: int, _numOfRegions: int, _treasureLocation: int, _pirat
         adjacent = [(-1, 0), (1, 0), (0, 1), (0, - 1)]
         setOfTiles = set()
         
-        for i in range(_w):
-            for j in range(_h):
+        for i in range(_h):
+            for j in range(_w):
                 for tup in adjacent:
                     if i + tup[0] >= 0 and i + tup[0] < _w and j + tup[1] >= 0 and j + tup[1] < _h:
                         region_1 = int(_map[i][j][0])
@@ -202,9 +202,6 @@ def genHint(_w: int, _h: int, _numOfRegions: int, _treasureLocation: int, _pirat
                             setOfTiles.add(j + i * _w)
         
         isTruth = (_treasureLocation) in setOfTiles
-        
-        for r in _map:
-            print(r)
         
         return (hint, setOfTiles, isTruth, f"The treasure is somewhere in the boundary of 2 regions.")
     elif hint == 12: # "The treasure is somewhere in an area bounded by 1-3 tiles from sea"
@@ -219,8 +216,8 @@ def genHint(_w: int, _h: int, _numOfRegions: int, _treasureLocation: int, _pirat
         
         setOfTiles = set()
         
-        for i in range(_w):
-            for j in range(_h):
+        for i in range(_h):
+            for j in range(_w):
                 if _map[i][j] == "0":
                     for tup in bounded:
                         if i + tup[0] >= 0 and i + tup[0] < _w and j + tup[1] >= 0 and j + tup[1] < _h:
@@ -322,8 +319,8 @@ def genHint(_w: int, _h: int, _numOfRegions: int, _treasureLocation: int, _pirat
         _temp = dict()
         regions = set()
         
-        for i in range(_w):
-            for j in range(_h):
+        for i in range(_h):
+            for j in range(_w):
                 if len(_map[i][j] > 1) and _map[i][j][1] == 'M': regions.add(_map[i][j][0])
                 
                 if _map[i][j][0] not in _temp.keys(): _temp[_map[i][j][0]] = [i * _w + j]

@@ -32,7 +32,7 @@ def generate_island_map(h, w, k):
   return grid
 
 # Generate a map with 5 rows, 5 columns, and 3 regions
-map = generate_island_map(8, 8, 4)
+map = generate_island_map(64, 64, 8)
 
 # Print map
 for row in map:
