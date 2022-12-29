@@ -1,0 +1,51 @@
+49
+WIN
+Round 1
+The pirate tells you a hint: A list of tiles [42, 90, 92, 97, 195] does not contain the treasure.
+Agent large scans at (6, 13)
+Move from (6, 13) to location (9, 13)
+Round 2
+The pirate tells you a hint: The treasure is somewhere in the boundary of 2 regions (1, 4)
+Move from (9, 13) to location (8, 13) and scan 3x3 area.
+Verify hint at round 2, the hint is False.
+Round 3
+The pirate tells you a hint: The treasure is somewhere in an area bounded by 3 tiles from sea.
+Verify hint at round 3, the hint is False.
+Move from (8, 13) to location (8, 10)
+Round 4
+The location of pirate is (3, 9).
+The pirate tells you a hint: The treasure is somewhere in the boundary of 2 regions (1, 4)
+Agent large scans at (8, 10)
+Verify hint at round 4, the hint is False.
+Round 5
+The pirate tells you a hint: All regions in [4, 2] do not have the treasure.
+Verify hint at round 5, the hint is False.
+Move from (8, 10) to location (5, 10)
+Round 6
+The pirate tells you a hint: The treasure is somewhere in the boundary of 2 regions (1, 4)
+Move from (5, 10) to location (6, 10) and scan 3x3 area.
+Move from (6, 10) to location (6, 13)
+Round 7
+The pirate tells you a hint: From center of the map, he tells you that direction SE has the treasure.
+Move from (6, 13) to location (6, 10)
+Move from (6, 10) to location (6, 13)
+Round 8
+The pirate has been freed.
+The pirate tells you a hint: Column 3 does not contain the treasure.
+Teleport to (3, 9)
+Agents large scan at (3, 9)
+The pirate move to location (3, 11)
+Round 9
+The pirate tells you a hint: From center of the map, he tells you that direction S has the treasure.
+Move from (3, 9) to location (3, 12)
+Move from (3, 12) to location (6, 12)
+The pirate move to location (5, 11)
+Round 10
+The pirate tells you a hint: There is treasure in the rectangle area [4, 3, 11, 10].
+Move from (6, 12) to location (6, 11) and scan 3x3 area.
+Move from (6, 11) to location (7, 11) and scan 3x3 area.
+The pirate move to location (7, 11)
+Round 11
+The pirate tells you a hint: The treasure is in a region that has mountain.
+Move from (7, 11) to location (11, 11)
+WIN

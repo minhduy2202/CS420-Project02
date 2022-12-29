@@ -1,0 +1,21 @@
+19
+WIN
+Round 1
+The pirate tells you a hint: A list of tiles [2, 8] does not contain the treasure.
+Move from (3, 3) to location (2, 3) and scan 3x3 area.
+Move from (2, 3) to location (2, 4) and scan 3x3 area.
+Round 2
+The location of pirate is (2, 1).
+The pirate tells you a hint: There is treasure in the rectangle area [1, 0, 2, 4].
+Move from (2, 4) to location (2, 3) and scan 3x3 area.
+Move from (2, 3) to location (2, 4) and scan 3x3 area.
+Round 3
+The pirate tells you a hint: From center of the map, he tells you that direction S has the treasure.
+Move from (2, 4) to location (2, 3) and scan 3x3 area.
+Move from (2, 3) to location (2, 4) and scan 3x3 area.
+Round 4
+The pirate has been freed.
+The pirate tells you a hint: The treasure is somewhere in the boundary of 2 regions (1, 2)
+Teleport to (2, 1)
+Agents large scan at (2, 1)
+WIN
