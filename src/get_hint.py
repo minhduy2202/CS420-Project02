@@ -76,7 +76,7 @@ def genHint(_h: int, _w: int, _numOfRegions: int, _treasureLocation: int, _pirat
         x2 = random.randrange(x1 + 1, x1 + 3)
         y2 = random.randrange(y1 + 1, y1 + 3)
         
-        isTruth = ~((x1 <= _treasureLocation // _w and _treasureLocation // _w <= x2) and (y1 <= _treasureLocation % _w and _treasureLocation % _w <= y2))
+        isTruth = not ((x1 <= _treasureLocation // _w and _treasureLocation // _w <= x2) and (y1 <= _treasureLocation % _w and _treasureLocation % _w <= y2))
         
         listOfTiles = []
         for i in range(x1, x2 + 1):
@@ -238,7 +238,7 @@ def genHint(_h: int, _w: int, _numOfRegions: int, _treasureLocation: int, _pirat
         if direction == 2: yr = int(_h / 2) # West
         if direction == 3: yl = int(_h / 2) # East
         
-        isTruth = ~(xl <= _treasureLocation // _w and _treasureLocation // _w <= xr and yl <= _treasureLocation % _w and _treasureLocation % _w <= yr)
+        isTruth = not (xl <= _treasureLocation // _w and _treasureLocation // _w <= xr and yl <= _treasureLocation % _w and _treasureLocation % _w <= yr)
         
         listOfTiles = []
         for i in range(xl, xr + 1):

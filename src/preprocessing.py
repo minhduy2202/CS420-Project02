@@ -30,7 +30,7 @@ def preprocessing(_w: int, _h: int, _treasure: int, _map: list):
         while queue:
             path = queue.pop(0)
             
-            if path[-1] == _treasure: return (agent, pirate, path[:-1:2] + ([path[-1]] if len(path) % 2 == 0 else []))
+            if path[-1] == _treasure: return (agent, pirate, path[::2] + ([path[-1]] if len(path) % 2 == 0 else []))
             
             # check = [False] * 4
             adjacent = [-1, 1, -_w, _w]
