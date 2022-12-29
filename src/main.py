@@ -1,24 +1,17 @@
 import argparse, os, re
 from preprocessing import preprocessing
-# from get_hint import genHint
-from get_map import genMap
+from getActions import getActions
+from get_hint import genHint
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Treasure Island')
     parser.add_argument('--read', type=str, default='data/input/', help='Input file directory')
-    parser.add_argument('--gen_map', type=bool, default=False, help='Generating map')
     
     args = parser.parse_args()
-
-    # python3 main.py --gen_map True
-    if args.gen_map:
-        map_gen, numOfRegions_gen, treasure_gen, agentLocation_gen, pirateLocation_gen = genMap(15, 15, numOfRegions=6, dataFolder=args.read)
     
     inputFolder = args.read
     
     os.chdir('..')
-    
-    print(os.getcwd())
     
     if not os.path.exists(inputFolder):
         print('Input folder not found')
@@ -45,34 +38,156 @@ if __name__ == '__main__':
             for i in range(mapSize[1]):
                 _map.append(f.readline().replace(' ', '').replace('\n', '').split(';'))
             
-
-            if args.gen_map:
-                mapSize = [len(map_gen[0]), len(map_gen)]
-                numOfRegions = numOfRegions_gen
-                treasure = treasure_gen[0] * mapSize[0] + treasure_gen[1]
-                _map = map_gen
-            
             f.close()
 
         agent, pirate, path = preprocessing(mapSize[0], mapSize[1], treasure, _map)
+        path.pop(0)
         if pirate == -1:
             print("There does not exist any path from the prisons to treasure.")
             continue
+    
+        for r in _map:
+            print(r)
         
         round = 1
-        kBase = []
         hints = []
         removedTiles = set()
+        w, h = mapSize[0], mapSize[1]
+        for i in range(mapSize[1]):
+            for j in range(mapSize[0]):
+                if _map[i][j] == '0' or 'M' in _map[i][j]:
+                    removedTiles.add(i * mapSize[1] + j)
+        
+        hintWeights = [1, 1, 1, 1, 1, 1, 0, 0.5, 1, 1, 1, 1, 0.5, 1, 0.5, 1]
+        canTele = True
+        knowTreasure = False
+        freed = False
+        prevMove = pirate
         
         while True:
             if round == revealRound:
-                # adjust hint probability
-                pass
+                hintWeights = [1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 0.5, 1, 0.5, 1]
+                print(f"The location of pirate is {(pirate // w, pirate % w)}.")
             if round == freeRound:
-                # free pirate
-                pass
+                print("The pirate has been freed.")
+                freed = True
+            
             # getHint
+            hint = genHint(mapSize[0], mapSize[1], numOfRegions, treasure, pirate, agent, _map, hintWeights)
+            if round == 1:
+                while ~hint[2]:
+                    hint = genHint(mapSize[0], mapSize[1], numOfRegions, treasure, pirate, agent, _map, hintWeights)
+                    
+                if hint[0] in [1, 4, 6, 9, 13]:
+                    for tile in hint[1]:
+                        removedTiles.add(tile)
+                else:
+                    for tile in range(mapSize[0] * mapSize[1]):
+                        if tile not in hint[1]:
+                            removedTiles.add(tile)
+            else: hints.append((hint, round))
+            print("The pirate tells you a hint: " + hint[-1])
+                
             # getActions
-            # applyActions
-            # Pirate moves if free
+            action = getActions(w, h, freed, canTele, knowTreasure, treasure, agent, pirate, prevMove, removedTiles, hints, _map)
+            if action[1] == "teleport":
+                canTele = False
+                agent = action[2]
+                print(f"Teleport to {(agent // w, agent % w)}")
+            if action[1] == "move":
+                print(f"Move from {(agent // w, agent % w)} to location {((agent + action[2]) // w, (agent + action[2]) % w)}")
+                agent += action[2]
+            if action[1] == "move and small scan":
+                print(f"Move from {(agent // w, agent % w)} to location {((agent + action[2]) // w, (agent + action[2]) % w)} and scan 3x3 area.")
+                agent += action[2]
+                for i in range(agent // w - 1, agent // w + 2):
+                    for j in range(agent % w - 1, agent % w + 2):
+                        if 0 <= i < mapSize[1] and 0 <= j < mapSize[0] and i * mapSize[1] + j not in removedTiles:
+                            removedTiles.add(i * w + j)
+            if action[1] == "large scan":
+                for i in range(agent // w - 2, agent // w + 3):
+                    for j in range(agent % w - 2, agent % w + 3):
+                        if 0 <= i < mapSize[1] and 0 <= j < mapSize[0] and i * mapSize[1] + j not in removedTiles:
+                            removedTiles.add(i * w + j)
+                print(f"Agent large scans at {(agent // w, agent % w)}")
+            if action[1] == "verify":
+                hint, hRound = action[2]
+                if hint[2]:
+                    if hint[0] in [1, 4, 6, 9, 13]:
+                        for tile in hint[1]:
+                            removedTiles.add(tile)
+                    else:
+                        for tile in range(mapSize[0] * mapSize[1]):
+                            if tile not in hint[1]:
+                                removedTiles.add(tile)
+                else:
+                    if hint[0] not in [1, 4, 6, 9, 13]:
+                        for tile in hint[1]:
+                            removedTiles.add(tile)
+                    else:
+                        for tile in range(mapSize[0] * mapSize[1]):
+                            if tile not in hint[1]:
+                                removedTiles.add(tile)
+                print(f"Verify hint at {hRound}, the hint is {hint[2]}.")
+            if treasure in removedTiles:
+                print("WIN")
+                break
+            if len(removedTiles) == w * h - 1:
+                knowTreasure = True          
+            action = getActions(w, h, freed, canTele, knowTreasure, treasure, agent, pirate, prevMove, removedTiles, hints, _map)
+            if action[1] == "teleport":
+                canTele = False
+                agent = action[2]
+                print(f"Teleport to {(agent // w, agent % w)}")
+            if action[1] == "move":
+                print(f"Move from {(agent // w, agent % w)} to location {((agent + action[2]) // w, (agent + action[2]) % w)}")
+                agent += action[2]
+            if action[1] == "move and small scan":
+                print(f"Move from {(agent // w, agent % w)} to location {((agent + action[2]) // w, (agent + action[2]) % w)} and scan 3x3 area.")
+                agent += action[2]
+                for i in range(agent // w - 1, agent // w + 2):
+                    for j in range(agent % w - 1, agent % w + 2):
+                        if 0 <= i < mapSize[1] and 0 <= j < mapSize[0] and i * mapSize[1] + j not in removedTiles:
+                            removedTiles.add(i * w + j)
+            if action[1] == "large scan":
+                for i in range(agent // w - 2, agent // w + 3):
+                    for j in range(agent % w - 2, agent % w + 3):
+                        if 0 <= i < mapSize[1] and 0 <= j < mapSize[0] and i * mapSize[1] + j not in removedTiles:
+                            removedTiles.add(i * w + j)
+                print(f"Agents large scan at {(agent // w, agent % w)}")
+            if action[1] == "verify":
+                hint, hRound = action[2]
+                if hint[2]:
+                    if hint[0] in [1, 4, 6, 9, 13]:
+                        for tile in hint[1]:
+                            removedTiles.add(tile)
+                    else:
+                        for tile in range(mapSize[0] * mapSize[1]):
+                            if tile not in hint[1]:
+                                removedTiles.add(tile)
+                else:
+                    if hint[0] not in [1, 4, 6, 9, 13]:
+                        for tile in hint[1]:
+                            removedTiles.add(tile)
+                    else:
+                        for tile in range(mapSize[0] * mapSize[1]):
+                            if tile not in hint[1]:
+                                removedTiles.add(tile)
+                print(f"Verify hint at {hRound}, the hint is {hint[2]}.")
+            if treasure in removedTiles:
+                print("WIN")
+                break
+            if len(removedTiles) == w * h - 1:
+                knowTreasure = True
+            if round >= freeRound:
+                prevMove = pirate
+                pirate = path[0]
+                path.pop(0)
+                print(f"The pirate move to location {(pirate // w, pirate % w)}")
+
+            round += 1
             # check finish
+            if pirate == treasure:
+                print("LOSE")
+                break
+            

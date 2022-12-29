@@ -1,10 +1,10 @@
 import random
 
-def genHint(_w: int, _h: int, _numOfRegions: int, _treasureLocation: int, _pirateLocation: int, _agentLocation: int, _map: list, _weights: list) -> tuple:
+def genHint(_h: int, _w: int, _numOfRegions: int, _treasureLocation: int, _pirateLocation: int, _agentLocation: int, _map: list, _weights: list) -> tuple:
     """
     *args:
-        @_w: Width.
         @_h: Height.
+        @_w: Width.
         @_numOfRegions: Number of regions that the map has.
         @_treasureLocation: The location of treasure.
         @_pirateLocation: The location of pirate.
@@ -20,7 +20,8 @@ def genHint(_w: int, _h: int, _numOfRegions: int, _treasureLocation: int, _pirat
     """
     numOfHints = 16
     
-    hint = 11#random.choices(range(1, numOfHints + 1), weights = _weights, k = 1);
+    hint = random.choices(range(1, numOfHints + 1), weights = _weights, k = 1);
+    hint = hint[0]
     
     if hint in [1, 2]: # "A list Of tiles ? that doesn't contain the treasure." and "A list Of tiles ? that contains the treasure."
         numOfTiles = random.randrange(int(_w * _h / 8) + 1)
@@ -56,10 +57,10 @@ def genHint(_w: int, _h: int, _numOfRegions: int, _treasureLocation: int, _pirat
         
         return (hint, listOfTiles, isTruth, f"All regions in {listOfRegions} do not have the treasure.")
     elif hint == 5: # "A rectangle area ? that has the treasure.",
-        x1 = random.randrange(int(_w / 4)  + 1)
-        y1 = random.randrange(int(_h / 4)  + 1)
-        x2 = random.randrange(x1 + int(_w * 3 / 8), _w)
-        y2 = random.randrange(y1 + int(_h * 3 / 8), _h)
+        x1 = random.randrange(int(_h / 4)  + 1)
+        y1 = random.randrange(int(_w / 4)  + 1)
+        x2 = random.randrange(x1 + int(_h * 3 / 8), _h)
+        y2 = random.randrange(y1 + int(_w * 3 / 8), _w)
         
         isTruth = (x1 <= _treasureLocation // _w and _treasureLocation // _w <= x2) and (y1 <= _treasureLocation % _w and _treasureLocation % _w <= y2)
         listOfTiles = []
@@ -70,8 +71,8 @@ def genHint(_w: int, _h: int, _numOfRegions: int, _treasureLocation: int, _pirat
         
         return (hint, listOfTiles, isTruth, f"There is treasure in the rectangle area {[x1, y1, x2, y2]}.")
     elif hint == 6: # "A rectangle area ? that doesn't have the treasure.",
-        x1 = random.randrange(_w - 4)
-        y1 = random.randrange(_h - 4)
+        x1 = random.randrange(_h - 4)
+        y1 = random.randrange(_w - 4)
         x2 = random.randrange(x1 + 1, x1 + 3)
         y2 = random.randrange(y1 + 1, y1 + 3)
         
@@ -91,19 +92,19 @@ def genHint(_w: int, _h: int, _numOfRegions: int, _treasureLocation: int, _pirat
         for i in range(_h):
             for j in range(_w):
                 if (abs(i - _agentLocation // _w) + abs(j - _agentLocation % _w)) < (abs(i - _pirateLocation // _w) + abs(j - _pirateLocation % _w)):
-                    listOfTiles.add(i * _w + j)
+                    listOfTiles.append(i * _w + j)
                     
         return (hint, listOfTiles, isTruth, "The pirate tells that you are the nearest person to the treasure.")
     elif hint == 8: # "A column and/or a row that contain the treasure." (rare),
         row, column = False, False
         
-        while ~row and ~column:
+        while not row and not column:
             if random.random() < 0.5: row = True
             if random.random() < 0.5: column = True
         
         r, c = -1, -1
-        if row: r = random.randrange(min(0, _treasureLocation // _w - 2), min(_w, _treasureLocation // _w + 3))
-        if column: c = random.randrange(min(0, _treasureLocation % _w - 2), min(_h, _treasureLocation % _w + 3))
+        if row: r = random.randrange(min(0, _treasureLocation // _w - 2), min(_h, _treasureLocation // _w + 3))
+        if column: c = random.randrange(min(0, _treasureLocation % _w - 2), min(_w, _treasureLocation % _w + 3))
         
         isTruth = False
         
@@ -129,13 +130,13 @@ def genHint(_w: int, _h: int, _numOfRegions: int, _treasureLocation: int, _pirat
     elif hint == 9: # "A column and/or a row that don't contain the treasure.",
         row, column = False, False
         
-        while ~row and ~column:
+        while not row and not column:
             if random.random() < 0.5: row = True
             if random.random() < 0.5: column = True
         
         r, c = -1, -1
-        if row: r = random.randrange(_w)
-        if column: c = random.randrange(_h)
+        if row: r = random.randrange(_h)
+        if column: c = random.randrange(_w)
         
         isTruth = False
         
@@ -252,7 +253,7 @@ def genHint(_w: int, _h: int, _numOfRegions: int, _treasureLocation: int, _pirat
         if choice == 0:
             x, y = int(_w / 2), int(_h / 2)                
         else:
-            x, y = _pirateLocation   
+            x, y = _pirateLocation // _w, _pirateLocation %_w
             
         setOfTiles = set()     
         
@@ -295,15 +296,15 @@ def genHint(_w: int, _h: int, _numOfRegions: int, _treasureLocation: int, _pirat
             
         return (hint, setOfTiles, isTruth, ("From center of the map" if choice == 0 else "From the prison that the pirate's staying") + f", he tells you that direction {d[direction]} has the treasure.")
     elif hint == 15: # 2 squares that are different in size, the small one is placed inside the bigger one, the treasure is somewhere inside the gap between 2 squares. (rare)
-        x1 = random.randrange(2, _w - 4)
-        y1 = random.randrange(2, _h - 4)
-        x2 = random.randrange(x1 + 1, x1 + 3)
-        y2 = random.randrange(y1 + 1, y1 + 3)
+        x1 = random.randrange(2, max(3, _h - 4))
+        y1 = random.randrange(2, max(3, _w - 4))
+        x2 = random.randrange(x1 + 1, min(_h, x1 + 3))
+        y2 = random.randrange(y1 + 1, min(_w, y1 + 3))
         
         x3 = random.randrange(x1)
-        x4 = random.randrange(x2 + 1, _w)
+        x4 = random.randrange(min(_h - 1, x2 + 1), _h)
         y3 = random.randrange(y1)
-        y4 = random.randrange(y2 + 1, _h)
+        y4 = random.randrange(min(_w - 1, y2 + 1), _w)
         
         setOfTiles = set()
         
@@ -321,7 +322,7 @@ def genHint(_w: int, _h: int, _numOfRegions: int, _treasureLocation: int, _pirat
         
         for i in range(_h):
             for j in range(_w):
-                if len(_map[i][j] > 1) and _map[i][j][1] == 'M': regions.add(_map[i][j][0])
+                if len(_map[i][j]) > 1 and _map[i][j][1] == 'M': regions.add(_map[i][j][0])
                 
                 if _map[i][j][0] not in _temp.keys(): _temp[_map[i][j][0]] = [i * _w + j]
                 else: _temp[_map[i][j][0]].append(i * _w + j)
