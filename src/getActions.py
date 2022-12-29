@@ -8,10 +8,10 @@ def calAvgTiles(_removed: set, _agent: int, _w: int, _h: int):
            x += i // _w
            y += i % _w
            cnt += 1
-    if cnt: return min(abs(x / cnt - _agent // _w), abs(y / cnt - _agent % _w))
+    if cnt: return abs(x / cnt - _agent // _w) + abs(y / cnt - _agent % _w)
     return 1000000000
 
-def getBestMove(_agent: int, _w: int, _h: int, _hints: list, _removed: list, _map: list):
+def getBestAction(_agent: int, _w: int, _h: int, _hints: list, _removed: list, _map: list):
     actions = []
     nRe = len(_removed)
     
@@ -60,26 +60,24 @@ def getBestMove(_agent: int, _w: int, _h: int, _hints: list, _removed: list, _ma
             ac = move[0] * _w + move[1]
             remove = cnt
         
-    if ac != 0: heapq.heappush(actions, (remove + min(_w * _h - len(_removed), 6), "move and small scan", ac))
+    if ac != 0: heapq.heappush(actions, (remove + min(_w * _h - len(_removed) + 1, 6), "move and small scan", ac))
     
     # large move
-    if remove == 0:
-        moves = [(0, 3), (3, 0), (-3, 0), (0, -3), (4, 0), (0, 4), (-4, 0), (0, 4)]
-        ac = 0
-        mn = 100000000
-        for i in range(8):
-            move = moves[i]
-            x, y = _agent // _w + move[0], _agent % _w + move[1]
-            if x < 0 or x >= _h or y < 0 or y >= _w or check[i % 4]: continue
-            if _map[x][y] == '0' or 'M' in _map[x][y]: 
-                check[i % 4] = True
-                continue
-            temp = calAvgTiles(_removed, x * _w + y, _w, _h)
-            if temp < mn:
-                mn = temp
-                ac = move[0] * _w + move[1]
-        
-        if ac != 0: heapq.heappush(actions, (min(_w * _h - len(_removed) + 1, 8), "move", ac))
+    moves = [(0, 3), (3, 0), (-3, 0), (0, -3), (4, 0), (0, 4), (-4, 0), (0, 4)]
+    ac = 0
+    for i in range(8):
+        move = moves[i]
+        x, y = _agent // _w + move[0], _agent % _w + move[1]
+        if x < 0 or x >= _h or y < 0 or y >= _w or check[i % 4]: continue
+        if _map[x][y] == '0' or 'M' in _map[x][y]: 
+            check[i % 4] = True
+            continue
+        temp = calAvgTiles(_removed, x * _w + y, _w, _h)
+        if temp < mn:
+            mn = temp
+            ac = move[0] * _w + move[1]
+    
+    if ac != 0: heapq.heappush(actions, (min(_w * _h - len(_removed) + 2, 8), "move", ac))
     
     return actions[-1]
 
@@ -89,7 +87,7 @@ def getActions(_w: int, _h: int, _freed: bool, _canTele: bool, _known: bool, _tr
     elif _known and _canTele:
         return (0, "teleport", _treasure)
     elif not _freed:
-        return getBestMove(_agent, _w, _h, _hints, _removed, _map)
+        return getBestAction(_agent, _w, _h, _hints, _removed, _map)
     else:
         if _canTele: return (0, "teleport", _pirate)
         if _pirate == _prevMove: return (0, "large scan", _agent)
@@ -159,4 +157,4 @@ def getActions(_w: int, _h: int, _freed: bool, _canTele: bool, _known: bool, _tr
             if i not in tiles and i != _treasure:
                 _removed.add(i)
         
-        return getBestMove(_agent, _w, _h, _hints, _removed, _map)
+        return getBestAction(_agent, _w, _h, _hints, _removed, _map)

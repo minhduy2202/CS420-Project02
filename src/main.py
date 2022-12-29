@@ -139,6 +139,9 @@ if __name__ == '__main__':
             if knowTreasure:
                 cnt = 0
                 win = False
+                if len(aPath) == 0:
+                    globals.lst_logs.append(f"Agent large scans at {(agent // w, agent % w)}")
+                    win = True
                 if canTele:
                     cnt += 1
                     canTele = False
@@ -174,7 +177,7 @@ if __name__ == '__main__':
                     aPath.pop(0)
                     cnt += 1
                     agent = new
-                if win or len(aPath) == 0:
+                if win:
                     globals.lst_logs.append("WIN")
                     # print("WIN")
                     break
@@ -301,6 +304,8 @@ if __name__ == '__main__':
                 # print(f"The pirate move to location {(pirate // w, pirate % w)}")
 
             round += 1
+            print(len(removedTiles), w*h)
+            print('------------------------------------')
             # check finish
             if pirate == treasure:
                 globals.lst_logs.append("LOSE")

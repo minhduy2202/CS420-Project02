@@ -1,98 +1,112 @@
-96
+110
 WIN
 Round 1
-The pirate tells you a hint: All regions in [5, 6, 9] do not have the treasure.
-Agent large scans at (22, 15)
-Move from (22, 15) to location (26, 15)
+The pirate tells you a hint: A list of tiles [1240, 3142, 66, 1163, 1953, 2828, 3100, 3015, 2081, 3133, 788, 3704, 1895, 3095, 1970, 923, 807, 1886, 2380, 1510, 158, 614, 488, 1937, 489, 339, 1360, 2915, 3393, 3483, 1200, 2521, 907, 1789, 2856, 2722, 3918, 43, 1149, 292, 3097, 467, 2229, 945, 2557, 2572, 3964, 1373, 1220, 121, 4054, 3995, 263, 3270, 3761, 1956, 1912, 912, 254, 472, 2486, 3535, 2785, 1874, 832, 1002, 1603, 193, 931, 3311, 153, 4024, 2434, 2816, 2562, 2906, 1405, 4028, 3585, 3632, 3919, 2499, 2133, 3401, 701, 180, 1029, 3858, 1151, 1062, 2464, 2611, 1334, 2844, 2274, 3578, 1175, 3873, 2087, 4080, 1214, 404, 955, 1946, 2351, 3559, 640, 720, 2645] does not contain the treasure.
+Agent large scans at (43, 38)
+Move from (43, 38) to location (39, 38)
 Round 2
-The pirate tells you a hint: Column 23 and row 5 do not contain the treasure.
-Agent large scans at (26, 15)
-Verify hint at round 2, the hint is True.
+The pirate tells you a hint: Column 44 and row 37 contain the treasure.
+Agent large scans at (39, 38)
+Verify hint at round 2, the hint is False.
 Round 3
-The pirate tells you a hint: There is no treasure in the rectangle area [28, 5, 30, 7].
-Verify hint at round 3, the hint is True.
-Move from (26, 15) to location (30, 15)
+The pirate tells you a hint: Half down side of the map does not have the treasure.
+Verify hint at round 3, the hint is False.
+Move from (39, 38) to location (43, 38)
 Round 4
-The pirate tells you a hint: There is treasure in the rectangle area [1, 8, 62, 40].
-Agent large scans at (30, 15)
-Verify hint at round 4, the hint is False.
+The pirate tells you a hint: All regions in [9, 7, 5] do not have the treasure.
+Verify hint at round 4, the hint is True.
+Move from (43, 38) to location (47, 38)
 Round 5
-The pirate tells you a hint: Column 38 contains the treasure.
+The pirate tells you a hint: One of region in [6, 1, 7, 4] has the treasure.
+Agent large scans at (47, 38)
 Verify hint at round 5, the hint is False.
-Move from (30, 15) to location (30, 18)
 Round 6
-The location of pirate is (11, 23).
-The pirate tells you a hint: There is no treasure in the rectangle area [8, 43, 10, 44].
-Verify hint at round 6, the hint is True.
-Move from (30, 18) to location (33, 18)
+The location of pirate is (15, 47).
+The pirate tells you a hint: From center of the map, he tells you that direction SW has the treasure.
+Move from (47, 38) to location (49, 38) and scan 3x3 area.
+Agents large scan at (49, 38)
 Round 7
-The pirate tells you a hint: The treasure is in a region that has mountain.
-Verify hint at round 7, the hint is False.
-Move from (33, 18) to location (37, 18)
+The pirate tells you a hint: There is no treasure in the rectangle area [52, 29, 53, 30].
+Verify hint at round 7, the hint is True.
+Move from (49, 38) to location (49, 36) and scan 3x3 area.
 Round 8
-The pirate tells you a hint: There is no treasure in the rectangle area [47, 24, 49, 25].
+The pirate tells you a hint: A list of tiles [1516, 3268, 615, 2514, 1355, 523, 2169, 2491, 2683, 2365, 1238, 484, 553, 1599, 4022, 1482, 2845, 531, 1462, 1616, 1653, 133, 230, 521, 528, 740, 3728, 2243, 1318, 506, 814, 1614, 557, 2616, 1035, 150, 3255, 571, 1293, 3868, 2883, 3518, 567, 1957, 3824, 1778, 47, 410, 3635, 645, 2576, 2744, 2309, 1617, 1372, 3744, 3184, 1264, 1222, 3930, 512, 1392, 1574, 3379, 3952, 3933, 264, 2016, 1577, 2951, 2582, 1213, 2234, 3638, 2551, 1990, 1120, 2025, 1615, 1449, 3516, 3097, 1820, 919, 1522, 493, 2504, 2486, 2942, 192, 2488, 3560, 442, 3850, 129, 3739, 3645, 3871, 3213, 1013, 1651, 1064, 3585, 893, 1529, 1875, 1786, 1682, 3163, 2013, 2719, 3134, 1854, 3234, 162, 203, 2259, 3279, 1077, 760, 2621, 1373, 3313, 1586, 455, 3649, 1991, 665, 4064, 128, 612, 697, 191, 445, 766, 2114, 703, 3959, 3877, 1121, 2453, 3421, 2463, 3968, 903, 3259, 2096, 4030, 2384, 1985, 1256, 4020, 1349, 1080, 2122, 172, 372, 57, 1954, 3702, 3577, 3777, 459, 3114, 2201, 3740, 3019, 1832, 2637, 2566, 3378] does not contain the treasure.
 Verify hint at round 8, the hint is True.
-Move from (37, 18) to location (37, 21)
+Move from (49, 36) to location (49, 35) and scan 3x3 area.
 Round 9
-The pirate tells you a hint: Row 19 contains the treasure.
-Verify hint at round 9, the hint is False.
-Move from (37, 21) to location (40, 21)
+The pirate tells you a hint: All regions in [4] do not have the treasure.
+Verify hint at round 9, the hint is True.
+Agents large scan at (49, 35)
 Round 10
-The pirate tells you a hint: The pirate tells that you are the nearest person to the treasure.
-Verify hint at round 10, the hint is True.
-Move from (40, 21) to location (44, 21)
+The pirate tells you a hint: The treasure is somewhere in the boundary of 2 regions (1, 6)
+Verify hint at round 10, the hint is False.
+Move from (49, 35) to location (49, 36) and scan 3x3 area.
 Round 11
-The pirate tells you a hint: Row 63 does not contain the treasure.
+The pirate tells you a hint: From center of the map, he tells you that direction SE has the treasure.
 Verify hint at round 11, the hint is True.
-Move from (44, 21) to location (48, 21)
+Verify hint at round 6, the hint is False.
 Round 12
 The pirate has been freed.
-The pirate tells you a hint: The treasure is somewhere inside the gap between [11, 30, 12, 32] and [6, 27, 47, 42].
-Teleport to (11, 23)
-Agents large scan at (11, 23)
-The pirate move to location (11, 25)
+The pirate tells you a hint: All regions in [7, 3] do not have the treasure.
+Teleport to (15, 47)
+Agents large scan at (15, 47)
+The pirate move to location (15, 49)
 Round 13
-The pirate tells you a hint: A list of tiles [3083, 552, 3396, 3685, 3779, 2600, 3621, 3376, 3632, 1838, 735, 1738, 943, 614, 4035, 3235, 2361, 503, 2545, 3477, 2778, 2480, 3909, 3417, 1281, 2534, 915, 2390, 1156] contains the treasure.
-Move from (11, 23) to location (11, 27)
-Move from (11, 27) to location (14, 27)
-The pirate move to location (11, 27)
+The pirate tells you a hint: There is no treasure in the rectangle area [4, 49, 6, 50].
+Move from (15, 47) to location (19, 47)
+Move from (19, 47) to location (23, 47)
+The pirate move to location (15, 51)
 Round 14
-The pirate tells you a hint: The treasure is somewhere in the boundary of 2 regions.
-Verify hint at round 13, the hint is False.
-Move from (14, 27) to location (17, 27)
-The pirate move to location (13, 27)
+The pirate tells you a hint: The treasure is in a region that has mountain.
+Verify hint at round 14, the hint is False.
+Move from (23, 47) to location (27, 47)
+The pirate move to location (15, 53)
 Round 15
-The pirate tells you a hint: The treasure is somewhere in the boundary of 2 regions.
-Move from (17, 27) to location (21, 27)
-Move from (21, 27) to location (24, 27)
-The pirate move to location (15, 27)
-Round 16
-The pirate tells you a hint: A list of tiles [743, 342, 17, 1421, 2865, 3489, 3950, 1831, 1738, 3206, 996, 2480, 3642, 3060, 323, 829, 3161, 2883, 3506, 1305, 2604, 2004, 4054, 231, 1187, 2486, 525, 3281, 1662, 1338, 3797, 578, 357, 2949, 1111, 1291, 1701, 579, 3724, 3604, 59, 3018, 2218, 3172, 1857, 3063, 3872, 198, 336, 4040, 2332, 2212, 3093, 3424, 1648] does not contain the treasure.
-Move from (24, 27) to location (27, 27)
-Move from (27, 27) to location (27, 30)
-The pirate move to location (16, 28)
-Round 17
 The pirate tells you a hint: The treasure is somewhere in an area bounded by 1 tiles from sea.
-Move from (27, 30) to location (31, 30)
-Move from (31, 30) to location (31, 34)
-The pirate move to location (18, 28)
+Verify hint at round 12, the hint is True.
+Move from (27, 47) to location (31, 47)
+The pirate move to location (15, 55)
+Round 16
+The pirate tells you a hint: The treasure is in a region that has mountain.
+Verify hint at round 16, the hint is False.
+Move from (31, 47) to location (35, 47)
+The pirate move to location (15, 57)
+Round 17
+The pirate tells you a hint: Half left side of the map does not have the treasure.
+Verify hint at round 17, the hint is True.
+Move from (35, 47) to location (39, 47)
+The pirate move to location (15, 59)
 Round 18
-The pirate tells you a hint: There is no treasure in the rectangle area [56, 45, 57, 46].
-Move from (31, 34) to location (31, 38)
-Move from (31, 38) to location (31, 42)
-The pirate move to location (20, 28)
+The pirate tells you a hint: There is no treasure in the rectangle area [31, 11, 33, 13].
+Verify hint at round 18, the hint is True.
+Move from (39, 47) to location (43, 47)
+The pirate move to location (15, 61)
 Round 19
-The pirate tells you a hint: A list of tiles [1532, 304, 425, 2848, 2800, 2851, 3018, 3403, 119, 239, 4049, 1666, 572, 3330, 2736, 858, 3896, 1638, 1595, 1303, 3205, 2248, 651, 2723, 2499, 1819, 1032, 711, 1682, 639, 217, 2096, 192, 1579, 94, 1357, 2503, 3166, 942, 796, 1821, 2718, 146, 2207, 444, 2943, 612, 2519, 729, 3731, 2175, 188, 1096, 225, 815, 3063, 441, 636, 1517, 2673, 1781, 171, 3469, 69, 968, 1784, 1141, 1038, 4089, 3644, 1644, 2435, 1196, 3861, 2293, 3858, 1523, 671, 2858, 3008, 2281, 3536, 3750, 4041, 620, 7, 791, 3796, 154, 380, 2162, 965, 1426, 3172, 1057, 3680, 1071, 2337, 3260, 2320, 3390, 2398, 3907, 2979, 3736, 1535, 3811, 3225, 2827, 534, 162, 156, 3275, 3924, 3638, 3968, 592, 690, 1398, 2427, 2822, 2598, 3873, 3128, 2100, 4, 2597, 1766, 1259, 3413, 4093, 2616, 3725, 1843, 499, 2734, 925, 1657, 3029, 3474, 1857, 2394, 311, 2836, 3104, 3227, 3274, 3290, 1456, 1493, 1892, 1773, 1601, 3622, 3937, 1230, 1708, 25, 3689, 3389, 3798, 819, 2127, 1285, 2515, 103, 2977, 2288, 3044, 3678, 2955, 1617, 1209, 615, 4037, 3936, 3195, 3277, 3856, 3028, 3590, 3402, 2573, 560, 3296, 2125, 2722, 1814, 795, 2189, 1667, 1159, 2670, 2935, 2137, 229, 2156, 58, 2025, 2927, 2375, 1086, 3543, 1137, 3428, 2289, 3211, 557, 2123, 664, 3975, 2595, 1356, 602, 2215, 1020, 1533, 2055, 2550, 2401, 2957, 537, 2083, 2318, 891, 969, 2413, 3459, 3522, 1076, 3593, 1490, 922, 3509, 125, 3868, 3911, 843, 1218, 3850, 473, 2422, 3014, 4086, 2767, 2953, 1609, 1021, 850, 4045, 1133, 3747, 41, 2688, 3112, 734, 1643, 3953, 971, 142, 2181, 4081, 11, 2609, 3485, 3346, 3570, 97, 1614, 3652, 531, 717, 2294, 391, 1331, 2440, 1395, 1906, 3217, 3264, 3944, 1558, 1681, 1245, 1825, 575, 963, 3881, 3960, 3748, 3079, 827, 1318, 1362, 756, 3080, 2661, 1231, 1797, 2592, 294, 2926, 3886, 723, 2334, 3230, 1373, 705, 1191, 4035, 3546, 1151, 3769, 56, 2564, 3631, 3556, 3688, 3784, 2257, 3893, 3214, 492, 1328, 1754, 4082, 871, 2420, 866, 3851, 1214, 3706, 59, 458, 522, 3202, 2690, 1169, 3859, 3068, 2841, 1536, 3430, 2452, 662, 1262, 542, 3164, 2247, 817, 1272, 1212, 1378, 3775, 2277, 4024, 2918, 1106, 1067, 106, 3996, 2562, 1296, 3231, 509, 2744, 2549, 432, 2834, 2087, 909, 939, 2565, 3994, 3216, 1567, 1738, 370, 235, 2295, 1713, 3416, 2916, 36, 1845, 2921, 2002, 856, 2821, 438, 3077, 1515, 270, 854, 1928, 1360, 1790, 1732, 3161, 3190, 934, 1408] does not contain the treasure.
-Move from (31, 42) to location (31, 46)
-Move from (31, 46) to location (31, 50)
-The pirate move to location (22, 28)
+The pirate tells you a hint: From center of the map, he tells you that direction SE has the treasure.
+Verify hint at round 19, the hint is True.
+Move from (43, 47) to location (47, 47)
+The pirate move to location (16, 62)
 Round 20
-The pirate tells you a hint: One of region in [5, 8] has the treasure.
-Move from (31, 50) to location (31, 54)
-Move from (31, 54) to location (31, 58)
-The pirate move to location (24, 28)
+The pirate tells you a hint: The treasure is somewhere in the boundary of 2 regions (8, 9)
+Verify hint at round 20, the hint is False.
+Move from (47, 47) to location (47, 51)
+The pirate move to location (18, 62)
 Round 21
-The pirate tells you a hint: The pirate tells that you are the nearest person to the treasure.
-Move from (31, 58) to location (31, 62)
-Move from (31, 62) to location (35, 62)
+The pirate tells you a hint: There is treasure in the rectangle area [7, 0, 42, 39].
+Move from (47, 51) to location (47, 55)
+Move from (47, 55) to location (47, 59)
+The pirate move to location (20, 62)
+Round 22
+The pirate tells you a hint: The treasure is in a region that has mountain.
+Move from (47, 59) to location (47, 62)
+Move from (47, 62) to location (43, 62)
+The pirate move to location (22, 62)
+Round 23
+The pirate tells you a hint: One of region in [5, 6] has the treasure.
+Move from (43, 62) to location (39, 62)
+Move from (39, 62) to location (35, 62)
+The pirate move to location (24, 62)
+Round 24
+The pirate tells you a hint: A list of tiles [716, 1151, 363, 1218, 2027, 1447, 1779, 2411, 2490, 3973, 209, 398, 1603, 74, 944, 1362, 413, 170, 2588, 1492, 3997, 2875, 2535, 3110, 1708, 311, 3142, 120, 779, 2602, 373, 3067, 1005, 2794, 2717, 1776, 1991, 1158, 26, 2437, 2447, 3041, 2178, 2531, 782, 3986, 654, 327, 816, 3809, 1188, 2234, 3627, 2112, 2171, 1312, 3742, 1390, 514, 3016, 1314, 105, 3910, 2505, 3119, 4086, 1486, 350, 3086, 141, 871, 3469, 1246, 3519, 1812, 798, 3899, 1882, 593, 124, 4072, 3410, 2713, 2128, 912, 3381, 1247, 1157, 4053, 2106, 842, 538, 2294, 803, 3429, 3693, 1774, 566, 1752, 3379, 2288, 410, 2095, 2129, 2640, 2564, 3349] contains the treasure.
+Agent large scans at (35, 62)
 WIN
