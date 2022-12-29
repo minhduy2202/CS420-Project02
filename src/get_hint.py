@@ -24,7 +24,7 @@ def genHint(_h: int, _w: int, _numOfRegions: int, _treasureLocation: int, _pirat
     hint = hint[0]
     
     if hint in [1, 2]: # "A list Of tiles ? that doesn't contain the treasure." and "A list Of tiles ? that contains the treasure."
-        numOfTiles = random.randrange(int(_w * _h / 8) + 1)
+        numOfTiles = random.randrange(2, int(_w * _h / 8) + 1)
         listOfTiles = random.sample(range(_w * _h), numOfTiles)
         
         isTruth = (hint == 1) ^ (_treasureLocation in listOfTiles)

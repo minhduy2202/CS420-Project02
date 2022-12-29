@@ -65,6 +65,7 @@ if __name__ == '__main__':
         prevMove = pirate
         
         while True:
+            print(f"Round {round}")
             if round == revealRound:
                 hintWeights = [1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 0.5, 1, 0.5, 1]
                 print(f"The location of pirate is {(pirate // w, pirate % w)}.")
@@ -128,7 +129,8 @@ if __name__ == '__main__':
                         for tile in range(mapSize[0] * mapSize[1]):
                             if tile not in hint[1]:
                                 removedTiles.add(tile)
-                print(f"Verify hint at {hRound}, the hint is {hint[2]}.")
+                hints.remove(action[2])
+                print(f"Verify hint at round {hRound}, the hint is " + ("True." if hint[2] else "False."))
             if treasure in removedTiles:
                 print("WIN")
                 break
@@ -173,7 +175,8 @@ if __name__ == '__main__':
                         for tile in range(mapSize[0] * mapSize[1]):
                             if tile not in hint[1]:
                                 removedTiles.add(tile)
-                print(f"Verify hint at {hRound}, the hint is {hint[2]}.")
+                hints.remove(action[2])
+                print(f"Verify hint at round {hRound}, the hint is " + ("True." if hint[2] else "False."))
             if treasure in removedTiles:
                 print("WIN")
                 break

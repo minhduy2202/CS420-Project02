@@ -109,7 +109,7 @@ def getActions(_w: int, _h: int, _freed: bool, _canTele: bool, _known: bool, _tr
                 ac = move[0] * _w + move[1]
                 remove = cnt
             
-        if ac != 0: heapq.heappush(actions, (remove + 6, "move and small scan", ac))
+        if ac != 0: heapq.heappush(actions, (remove + min(_w * _h - len(_removed), 6), "move and small scan", ac))
         
         # large move
         moves = [(0, 3), (3, 0), (-3, 0), (0, -3), (4, 0), (0, 4), (-4, 0), (0, 4)]
@@ -127,7 +127,7 @@ def getActions(_w: int, _h: int, _freed: bool, _canTele: bool, _known: bool, _tr
                 mn = temp
                 ac = move[0] * _w + move[1]
         
-        if ac: heapq.heappush(actions, (12, "move", ac))
+        if ac != 0: heapq.heappush(actions, (min(_w * _h - len(_removed), 12), "move", ac))
         
         return actions[-1]
     else:
