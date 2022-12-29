@@ -62,6 +62,7 @@ def generate_island_map(h, w, k):
         row = random.randint(1, h - 2)
         col = random.randint(1, w - 2)
     treasureLocation = [row, col]
+    grid[row][col] += 'T'
 
     return grid, treasureLocation
 
