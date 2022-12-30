@@ -1,21 +1,76 @@
-19
+74
 WIN
 Round 1
-The pirate tells you a hint: A list of tiles [2, 8] does not contain the treasure.
-Move from (3, 3) to location (2, 3) and scan 3x3 area.
-Move from (2, 3) to location (2, 4) and scan 3x3 area.
+The pirate tells you a hint: Column 10 and row 6 do not contain the treasure.
+Agent large scans at (8, 1)
+Move from (8, 1) to location (8, 4)
 Round 2
-The location of pirate is (2, 1).
-The pirate tells you a hint: There is treasure in the rectangle area [1, 0, 2, 4].
-Move from (2, 4) to location (2, 3) and scan 3x3 area.
-Move from (2, 3) to location (2, 4) and scan 3x3 area.
+The pirate tells you a hint: Half down side of the map does not have the treasure.
+Agent large scans at (8, 4)
+Verify hint at round 2, the hint is False.
 Round 3
-The pirate tells you a hint: From center of the map, he tells you that direction S has the treasure.
-Move from (2, 4) to location (2, 3) and scan 3x3 area.
-Move from (2, 3) to location (2, 4) and scan 3x3 area.
+The pirate tells you a hint: All regions in [1, 4, 8] do not have the treasure.
+Verify hint at round 3, the hint is True.
+Move from (8, 4) to location (8, 7)
 Round 4
+The location of pirate is (6, 11).
+The pirate tells you a hint: One of region in [7, 9, 5, 2] has the treasure.
+Move from (8, 7) to location (9, 7) and scan 3x3 area.
+Verify hint at round 4, the hint is True.
+Round 5
+The pirate tells you a hint: All regions in [7] do not have the treasure.
+Verify hint at round 5, the hint is True.
+Move from (9, 7) to location (8, 7) and scan 3x3 area.
+Round 6
+The pirate tells you a hint: The treasure is in a region that has mountain.
+Move from (8, 7) to location (9, 7) and scan 3x3 area.
+Move from (9, 7) to location (8, 7) and scan 3x3 area.
+Round 7
+The pirate tells you a hint: The treasure is somewhere in the boundary of 2 regions.
+Verify hint at round 6, the hint is True.
+Move from (8, 7) to location (9, 7) and scan 3x3 area.
+Round 8
 The pirate has been freed.
-The pirate tells you a hint: The treasure is somewhere in the boundary of 2 regions (1, 2)
-Teleport to (2, 1)
-Agents large scan at (2, 1)
+The pirate tells you a hint: From center of the map, he tells you that direction W has the treasure.
+Teleport to (6, 11)
+Agents large scan at (6, 11)
+The pirate move to location (4, 11)
+Round 9
+The pirate tells you a hint: Column 3 and row 2 do not contain the treasure.
+Verify hint at round 9, the hint is True.
+Move from (6, 11) to location (10, 11)
+The pirate move to location (3, 10)
+Round 10
+The pirate tells you a hint: The treasure is somewhere in the boundary of 2 regions (1, 8)
+Move from (10, 11) to location (12, 11) and scan 3x3 area.
+Move from (12, 11) to location (12, 10) and scan 3x3 area.
+The pirate move to location (3, 8)
+Round 11
+The pirate tells you a hint: From center of the map, he tells you that direction W has the treasure.
+Move from (12, 10) to location (12, 11) and scan 3x3 area.
+Move from (12, 11) to location (11, 11) and scan 3x3 area.
+The pirate move to location (4, 7)
+Round 12
+The pirate tells you a hint: The pirate tells that you are the nearest person to the treasure.
+Move from (11, 11) to location (7, 11)
+Move from (7, 11) to location (3, 11)
+The pirate move to location (4, 5)
+Round 13
+The pirate tells you a hint: The treasure is somewhere in the boundary of 2 regions (5, 9)
+Move from (3, 11) to location (3, 8)
+Move from (3, 8) to location (4, 8) and scan 3x3 area.
+The pirate move to location (4, 3)
+Round 14
+The pirate tells you a hint: Row 13 contains the treasure.
+Move from (4, 8) to location (4, 4)
+Move from (4, 4) to location (8, 4)
+The pirate move to location (6, 3)
+Round 15
+The pirate tells you a hint: Column 15 and row 10 do not contain the treasure.
+Move from (8, 4) to location (12, 4)
+Move from (12, 4) to location (12, 1)
+The pirate move to location (8, 3)
+Round 16
+The pirate tells you a hint: The treasure is somewhere in the boundary of 2 regions.
+Agent large scans at (12, 1)
 WIN
