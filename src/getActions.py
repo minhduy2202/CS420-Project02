@@ -63,7 +63,7 @@ def getBestAction(_agent: int, _w: int, _h: int, _hints: list, _removed: list, _
     if ac != 0: heapq.heappush(actions, (remove + min(_w * _h - len(_removed) + 1, 6), "move and small scan", ac))
     
     # large move
-    moves = [(0, 3), (3, 0), (-3, 0), (0, -3), (4, 0), (0, 4), (-4, 0), (0, 4)]
+    moves = [(0, 3), (3, 0), (-3, 0), (0, -3), (0, 4), (4, 0), (-4, 0), (0, -4)]
     ac = 0
     for i in range(8):
         move = moves[i]
