@@ -152,9 +152,6 @@ if __name__ == '__main__':
             final_listOfTilesHint = hint[1]
 
             # Visualize the hint
-            visualize.updateHintToTab(_map, round, hint[1], [
-                                      agent // w, agent % w], [pirate // w, pirate % w], freed)
-
             if round == 1:
                 while not hint[2]:
                     hint = genHint(
@@ -167,8 +164,11 @@ if __name__ == '__main__':
                     for tile in range(mapSize[0] * mapSize[1]):
                         if tile not in hint[1]:
                             removedTiles.add(tile)
+                final_listOfTilesHint = hint[1]
             else:
                 hints.append((hint, round))
+            visualize.updateHintToTab(_map, round, hint[1], [
+                                      agent // w, agent % w], [pirate // w, pirate % w], freed)
             globals.lst_logs.append("The pirate tells you a hint: " + hint[-1])
             # print("The pirate tells you a hint: " + hint[-1])
 
@@ -366,7 +366,6 @@ if __name__ == '__main__':
             final_pirate, final_isPirateFree, final_round, final_removedTiles = pirate, freed, round, removedTiles
 
             round += 1
-            # print(len(removedTiles), w*h)
             # print('------------------------------------')
             # check finish
             if pirate == treasure:

@@ -15,24 +15,8 @@ def getBestAction(_agent: int, _w: int, _h: int, _hints: list, _removed: list, _
     actions = []
     nRe = len(_removed)
     
-    # verify action
-    for hint in _hints:
-        cnt = 0
-        for tile in hint[0][1]:
-            if tile not in _removed:
-                cnt += 1
-        heapq.heappush(actions, (max(cnt, _w * _h - nRe - cnt), "verify", hint))
-    
-    # large scan
     xAgent = _agent // _w
     yAgent = _agent % _w
-    cnt = 0
-    for i in range(xAgent - 2, xAgent + 3):
-        for j in range(yAgent - 2, yAgent + 3):
-            if 0 <= i < _h and 0 <= j < _w and i * _w + j not in _removed:
-                cnt += 1
-    
-    heapq.heappush(actions, (cnt, "large scan", _agent))
     
     check = [False] * 4
     
@@ -60,7 +44,7 @@ def getBestAction(_agent: int, _w: int, _h: int, _hints: list, _removed: list, _
             ac = move[0] * _w + move[1]
             remove = cnt
         
-    if ac != 0: heapq.heappush(actions, (remove + min(_w * _h - len(_removed) + 1, 6), "move and small scan", ac))
+    if ac != 0: heapq.heappush(actions, (-(remove + min(_w * _h - len(_removed) + 1, 6)), "move and small scan", ac))
     
     # large move
     moves = [(0, 3), (3, 0), (-3, 0), (0, -3), (0, 4), (4, 0), (-4, 0), (0, -4)]
@@ -77,9 +61,26 @@ def getBestAction(_agent: int, _w: int, _h: int, _hints: list, _removed: list, _
             mn = temp
             ac = move[0] * _w + move[1]
     
-    if ac != 0: heapq.heappush(actions, (min(_w * _h - len(_removed) + 2, 8), "move", ac))
+    if ac != 0: heapq.heappush(actions, (-(min(_w * _h - len(_removed) + 2, 8)), "move", ac))
     
-    return actions[-1]
+    # verify action
+    for hint in _hints:
+        cnt = 0
+        for tile in hint[0][1]:
+            if tile not in _removed:
+                cnt += 1
+        heapq.heappush(actions, (-(max(cnt, _w * _h - nRe - cnt)), "verify", hint))
+    
+    # large scan
+    cnt = 0
+    for i in range(xAgent - 2, xAgent + 3):
+        for j in range(yAgent - 2, yAgent + 3):
+            if 0 <= i < _h and 0 <= j < _w and i * _w + j not in _removed:
+                cnt += 1
+    
+    heapq.heappush(actions, (-cnt, "large scan", _agent))
+    print(actions)
+    return heapq.heappop(actions)
 
 def getActions(_w: int, _h: int, _freed: bool, _canTele: bool, _known: bool, _treasure: int, _agent: int, _pirate: int, _prevMove: int, _removed: set, _hints: list, _map: list, _prev: list):
     if _known and _treasure == _agent:
