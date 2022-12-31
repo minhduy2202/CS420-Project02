@@ -95,7 +95,7 @@ def getBestAction(_agent: int, _w: int, _h: int, _hints: list, _removed: list, _
     return heapq.heappop(actions)
 
 
-def getActions(_w: int, _h: int, _freed: bool, _canTele: bool, _known: bool, _treasure: int, _agent: int, _pirate: int, _prevMove: int, _removed: set, _hints: list, _map: list, _prev: list):
+def getActions(_w: int, _h: int, _freed: bool, _canTele: bool, _known: bool, _treasure: int, _agent: int, _pirate: int, _prevMove: int, _removed: set, _hints: list, _map: list):
     if _known and _treasure == _agent:
         return (0, "large scan", _agent)
     elif _known and _canTele:

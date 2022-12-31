@@ -133,7 +133,6 @@ if __name__ == '__main__':
         knowTreasure = False
         freed = False
         prevMove = pirate
-        prev = []
         aPath = []
 
         isWin = True
@@ -246,7 +245,7 @@ if __name__ == '__main__':
                     break
             else:
                 action = getActions(w, h, freed, canTele, knowTreasure, treasure,
-                                    agent, pirate, prevMove, removedTiles, hints, _map, prev)
+                                    agent, pirate, prevMove, removedTiles, hints, _map)
                 if action[1] == "teleport":
                     canTele = False
                     agent = action[2]
@@ -309,7 +308,7 @@ if __name__ == '__main__':
                     aPath.pop(0)
                     knowTreasure = True
                 action = getActions(w, h, freed, canTele, knowTreasure, treasure,
-                                    agent, pirate, prevMove, removedTiles, hints, _map, prev)
+                                    agent, pirate, prevMove, removedTiles, hints, _map)
                 if action[1] == "teleport":
                     canTele = False
                     agent = action[2]
