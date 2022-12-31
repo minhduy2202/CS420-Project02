@@ -51,6 +51,14 @@ def writeLog2File(sFile, sLocation="data/output/"):
     f.close()
 
 
+def printLog():
+    print(str(len(globals.lst_logs)))
+    print(globals.lst_logs[-1])
+
+    for x in globals.lst_logs:
+        print(x)
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Treasure Island')
     parser.add_argument('--read', type=str,
@@ -69,6 +77,7 @@ if __name__ == '__main__':
     # inputFilePattern = re.compile('MAP_\d+\.txt')
     sInputFile = "MAP_01\.txt"
     inputFilePattern = re.compile(sInputFile)
+    isVisualize = True
 
     for file in os.listdir(inputFolder):
         if not re.match(inputFilePattern, file):
@@ -107,8 +116,9 @@ if __name__ == '__main__':
             continue
 
         # Get Visualization
-        visualize = MyVisualization(
-            _map, numOfRegions, [agent // w, agent % w])
+        if isVisualize:
+            visualize = MyVisualization(
+                _map, numOfRegions, [agent // w, agent % w])
 
         round = 1
         hints = []
@@ -151,7 +161,6 @@ if __name__ == '__main__':
 
             final_listOfTilesHint = hint[1]
 
-            # Visualize the hint
             if round == 1:
                 while not hint[2]:
                     hint = genHint(
@@ -167,8 +176,11 @@ if __name__ == '__main__':
                 final_listOfTilesHint = hint[1]
             else:
                 hints.append((hint, round))
-            visualize.updateHintToTab(_map, round, hint[1], [
-                                      agent // w, agent % w], [pirate // w, pirate % w], freed)
+
+            # Visualize the hint
+            if isVisualize:
+                visualize.updateHintToTab(_map, round, hint[1], [
+                    agent // w, agent % w], [pirate // w, pirate % w], freed)
             globals.lst_logs.append("The pirate tells you a hint: " + hint[-1])
             # print("The pirate tells you a hint: " + hint[-1])
 
@@ -360,8 +372,9 @@ if __name__ == '__main__':
                 # print(f"The pirate move to location {(pirate // w, pirate % w)}")
 
             # Add tab to Visualization
-            visualize.addNewTab(_map, round + 1, removedTiles,
-                                [agent // w, agent % w], [pirate // w, pirate % w], freed)
+            if isVisualize:
+                visualize.addNewTab(_map, round + 1, removedTiles,
+                                    [agent // w, agent % w], [pirate // w, pirate % w], freed)
 
             final_pirate, final_isPirateFree, final_round, final_removedTiles = pirate, freed, round, removedTiles
 
@@ -377,11 +390,15 @@ if __name__ == '__main__':
         # write log to file before visualizing
         writeLog2File(file[4:-4], sLocation="data/output/")
         print("Done (output to log file)!")
+        print("===================================")
+        printLog()
+        print("===================================")
         print("The visualization (size ~ 20)...")
 
         # show visualization
-        if final_round > 1:
-            visualize.updateLastHintToTab(final_round + 1, final_listOfTilesHint, [
-                                          final_agent // w, final_agent % w], [final_pirate // w, final_pirate % w], final_isPirateFree)
-        visualize.addLastTab(isWin)
-        visualize.showVisualization()
+        if isVisualize:
+            if final_round > 1:
+                visualize.updateLastHintToTab(final_round + 1, final_listOfTilesHint, [
+                    final_agent // w, final_agent % w], [final_pirate // w, final_pirate % w], final_isPirateFree)
+            visualize.addLastTab(isWin)
+            visualize.showVisualization()
