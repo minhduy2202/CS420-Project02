@@ -143,6 +143,8 @@ class MyVisualization:
         self.tabs.add(curFrame, text='Result')
         self.lst_tabs.append(curFrame)
         if isWin:
-            Label(curFrame, text='WIN', bg='green', fg='white').pack()
+            Label(curFrame, text='WIN', bg='green',
+                  fg='white', font=('Arial', 20)).pack()
         else:
-            Label(curFrame, text='LOSE', bg='red', fg='white').pack()
+            Label(curFrame, text='LOSE', bg='red',
+                  fg='white', font=('Arial', 20)).pack()

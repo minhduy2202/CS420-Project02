@@ -1,84 +1,84 @@
 82
 WIN
 Round 1
-The pirate tells you a hint: A list of tiles [112, 248, 997, 275, 18, 581, 301, 885, 305, 0, 286, 846, 992, 99, 473, 109, 415, 357, 880, 117, 629, 554, 920, 924, 661, 238, 644, 337, 890, 480, 708, 712, 959, 949, 764, 572, 503, 830, 517, 339, 336, 620, 514, 69, 8, 961, 306, 179, 827, 54, 673, 243, 840, 946, 571, 65, 894, 1010, 21, 653, 918, 803, 375, 127, 201, 557, 679, 409, 343, 67, 425, 995] does not contain the treasure.
-Agent large scans at (13, 18)
-Move from (13, 18) to location (16, 18)
+The pirate tells you a hint: Half right side of the map does not have the treasure.
+Move from (18, 17) to location (18, 13)
+Agents large scan at (18, 13)
 Round 2
-The pirate tells you a hint: All regions in [7, 3] do not have the treasure.
-Agent large scans at (16, 18)
-Verify hint at round 2, the hint is False.
-Round 3
 The pirate tells you a hint: The treasure is in a region that has mountain.
-Verify hint at round 3, the hint is True.
-Move from (16, 18) to location (20, 18)
+Verify hint at round 2, the hint is True.
+Move from (18, 13) to location (18, 9)
+Round 3
+The pirate tells you a hint: The treasure is somewhere in an area bounded by 1 tiles from sea.
+Verify hint at round 3, the hint is False.
+Agents large scan at (18, 9)
 Round 4
-The pirate tells you a hint: A list of tiles [335, 296, 687, 886, 203, 275, 199, 740, 576, 494, 44, 162, 776, 540, 755, 46, 442, 702, 361, 909, 696, 728, 787] contains the treasure.
-Verify hint at round 4, the hint is False.
-Move from (20, 18) to location (24, 18)
+The pirate tells you a hint: Column 6 does not contain the treasure.
+Verify hint at round 4, the hint is True.
+Move from (18, 9) to location (16, 9) and scan 3x3 area.
 Round 5
-The location of pirate is (3, 16).
-The pirate tells you a hint: Column 26 and row 15 do not contain the treasure.
-Agent large scans at (24, 18)
-Verify hint at round 5, the hint is True.
+The location of pirate is (18, 6).
+The pirate tells you a hint: A list of tiles [323, 952, 279, 367] contains the treasure.
+Verify hint at round 5, the hint is False.
+Move from (16, 9) to location (16, 7) and scan 3x3 area.
 Round 6
-The pirate tells you a hint: Column 6 contains the treasure.
-Verify hint at round 6, the hint is False.
-Move from (24, 18) to location (24, 15)
+The pirate tells you a hint: There is treasure in the rectangle area [2, 1, 25, 24].
+Verify hint at round 6, the hint is True.
+Agents large scan at (16, 7)
 Round 7
-The pirate tells you a hint: Column 8 and row 16 do not contain the treasure.
-Agent large scans at (24, 15)
-Verify hint at round 7, the hint is True.
+The pirate tells you a hint: The treasure is somewhere in the boundary of 2 regions (1, 2)
+Verify hint at round 7, the hint is False.
+Move from (16, 7) to location (14, 7) and scan 3x3 area.
 Round 8
-The pirate tells you a hint: The treasure is somewhere in the boundary of 2 regions.
-Verify hint at round 8, the hint is False.
-Move from (24, 15) to location (28, 15)
+The pirate tells you a hint: The treasure is in a region that has mountain.
+Verify hint at round 8, the hint is True.
+Move from (14, 7) to location (14, 6) and scan 3x3 area.
 Round 9
-The pirate tells you a hint: There is treasure in the rectangle area [6, 3, 29, 30].
-Move from (28, 15) to location (28, 13) and scan 3x3 area.
-Agents large scan at (28, 13)
+The pirate tells you a hint: There is treasure in the rectangle area [3, 8, 24, 24].
+Verify hint at round 9, the hint is False.
+Agents large scan at (14, 6)
 Round 10
 The pirate has been freed.
-The pirate tells you a hint: The treasure is in a region that has mountain.
-Teleport to (3, 16)
-Agents large scan at (3, 16)
-The pirate move to location (3, 18)
+The pirate tells you a hint: There is no treasure in the rectangle area [14, 2, 16, 4].
+Teleport to (18, 6)
+Agents large scan at (18, 6)
+The pirate move to location (18, 8)
 Round 11
-The pirate tells you a hint: From center of the map, he tells you that direction W has the treasure.
-Move from (3, 16) to location (7, 16)
-Move from (7, 16) to location (8, 16) and scan 3x3 area.
-The pirate move to location (4, 19)
+The pirate tells you a hint: Column 0 and row 5 contain the treasure.
+Verify hint at round 10, the hint is True.
+Verify hint at round 11, the hint is False.
+The pirate move to location (18, 10)
 Round 12
-The pirate tells you a hint: The treasure is somewhere inside the gap between [20, 22, 22, 23] and [19, 19, 27, 28].
-Move from (8, 16) to location (4, 16)
-Move from (4, 16) to location (4, 20)
-The pirate move to location (4, 21)
-Round 13
-The pirate tells you a hint: The treasure is somewhere in the boundary of 2 regions (2, 9)
-Move from (4, 20) to location (4, 24)
-Move from (4, 24) to location (5, 24) and scan 3x3 area.
-The pirate move to location (4, 23)
-Round 14
-The pirate tells you a hint: The treasure is somewhere in the boundary of 2 regions (3, 6)
-Move from (5, 24) to location (9, 24)
-Move from (9, 24) to location (13, 24)
-The pirate move to location (5, 24)
-Round 15
-The pirate tells you a hint: Column 6 does not contain the treasure.
-Move from (13, 24) to location (13, 20)
-Move from (13, 20) to location (13, 16)
-The pirate move to location (7, 24)
-Round 16
-The pirate tells you a hint: There is treasure in the rectangle area [8, 8, 24, 25].
-Move from (13, 16) to location (17, 16)
-Move from (17, 16) to location (21, 16)
-The pirate move to location (9, 24)
-Round 17
 The pirate tells you a hint: The treasure is somewhere in the boundary of 2 regions (1, 7)
+Verify hint at round 12, the hint is False.
+Move from (18, 6) to location (18, 10)
+The pirate move to location (18, 12)
+Round 13
+The pirate tells you a hint: A list of tiles [763, 985, 518, 7, 658, 397, 504, 853, 111, 292, 805, 814, 215, 92, 435, 676, 573, 859] does not contain the treasure.
+Move from (18, 10) to location (18, 14)
+Move from (18, 14) to location (15, 14)
+The pirate move to location (18, 14)
+Round 14
+The pirate tells you a hint: A list of tiles [978, 536, 139, 575, 558, 688, 955, 381, 597, 949, 216, 454, 880, 421, 436, 742, 548, 162, 954, 407, 567, 177, 852, 1023, 649, 147, 133, 163, 360, 217, 689, 4, 455, 57, 963, 173, 494, 869, 263, 883, 151, 778, 610, 529, 84, 739, 773, 641, 561, 555, 702, 371, 876, 205, 112, 810, 242, 401, 974, 33, 203, 632, 760, 447, 453, 55, 336, 427, 921, 227, 75, 491, 693, 468, 240, 248, 734, 596, 973, 239, 347, 943, 800, 12, 19, 722, 243, 54, 268, 931, 117, 77] contains the treasure.
+Move from (15, 14) to location (16, 14) and scan 3x3 area.
+Move from (16, 14) to location (15, 14) and scan 3x3 area.
+The pirate move to location (18, 16)
+Round 15
+The pirate tells you a hint: All regions in [13] do not have the treasure.
+Move from (15, 14) to location (19, 14)
+Move from (19, 14) to location (19, 12) and scan 3x3 area.
+The pirate move to location (20, 16)
+Round 16
+The pirate tells you a hint: A list of tiles [288, 831, 352, 265, 181] does not contain the treasure.
+Move from (19, 12) to location (19, 16)
+Move from (19, 16) to location (21, 16) and scan 3x3 area.
+The pirate move to location (22, 16)
+Round 17
+The pirate tells you a hint: The treasure is in a region that has mountain.
 Move from (21, 16) to location (25, 16)
 Move from (25, 16) to location (25, 12)
-The pirate move to location (11, 24)
+The pirate move to location (22, 14)
 Round 18
-The pirate tells you a hint: A list of tiles [850, 669, 601, 651, 446, 46, 71, 727, 889, 735, 328, 289, 746, 250, 124, 583, 713, 828, 637, 846, 390, 344, 408, 514, 658, 461, 867, 360, 189, 672, 957, 610, 630, 283, 238, 270, 527, 841, 305, 414, 221, 724, 448, 590, 191, 513, 417, 86, 338, 199, 418, 290, 354, 243, 657, 973, 112, 311, 554, 858, 42, 911, 750, 439, 540, 352, 129, 530, 182, 765, 1005, 649, 845, 387, 233, 709, 748, 277, 300, 502, 128, 155, 113, 638, 304, 195, 215, 294, 242, 210, 732, 435, 788, 994, 541, 440, 73, 998, 164, 880, 153, 97] does not contain the treasure.
+The pirate tells you a hint: One of region in [2, 6, 7, 13, 4] has the treasure.
 Agent large scans at (25, 12)
 WIN
