@@ -79,7 +79,6 @@ def getBestAction(_agent: int, _w: int, _h: int, _hints: list, _removed: list, _
                 cnt += 1
     
     heapq.heappush(actions, (-cnt, "large scan", _agent))
-    print(actions)
     return heapq.heappop(actions)
 
 def getActions(_w: int, _h: int, _freed: bool, _canTele: bool, _known: bool, _treasure: int, _agent: int, _pirate: int, _prevMove: int, _removed: set, _hints: list, _map: list, _prev: list):
@@ -90,8 +89,8 @@ def getActions(_w: int, _h: int, _freed: bool, _canTele: bool, _known: bool, _tr
     elif not _freed:
         return getBestAction(_agent, _w, _h, _hints, _removed, _map)
     else:
-        if _canTele: return (0, "teleport", _pirate)
-        if _pirate == _prevMove: return (0, "large scan", _agent)
+        # if _canTele: return (0, "teleport", _pirate)
+        # if _pirate == _prevMove: return (0, "large scan", _agent)
         
         tiles = []
         inRangeOfPirate = []

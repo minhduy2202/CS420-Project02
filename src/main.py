@@ -67,7 +67,7 @@ if __name__ == '__main__':
         exit()
 
     # inputFilePattern = re.compile('MAP_\d+\.txt')
-    sInputFile = "MAP_01\.txt"
+    sInputFile = "MAP_02\.txt"
     inputFilePattern = re.compile(sInputFile)
 
     for file in os.listdir(inputFolder):
@@ -172,21 +172,29 @@ if __name__ == '__main__':
             globals.lst_logs.append("The pirate tells you a hint: " + hint[-1])
             # print("The pirate tells you a hint: " + hint[-1])
 
+            if round >= freeRound:
+                prevMove = pirate
+                pirate = path[0]
+                path.pop(0)
+                globals.lst_logs.append(
+                    f"The pirate move to location {(pirate // w, pirate % w)}")
+                # print(f"The pirate move to location {(pirate // w, pirate % w)}")
+                
             # getActions
             if knowTreasure:
                 cnt = 0
                 win = False
-                if len(aPath) == 0:
-                    globals.lst_logs.append(
-                        f"Agent large scans at {(agent // w, agent % w)}")
-                    win = True
                 if canTele:
                     cnt += 1
                     canTele = False
                     agent = treasure
-
+                    win = True
                     globals.lst_logs.append(
                         f"Teleport to {(agent // w, agent % w)}")
+                if len(aPath) == 0:
+                    globals.lst_logs.append(
+                        f"Agent large scans at {(agent // w, agent % w)}")
+                    win = True
                     # print(f"Teleport to {(agent // w, agent % w)}")
                 while cnt < 2 and aPath and not win:
                     xAgent = agent // w
@@ -350,14 +358,6 @@ if __name__ == '__main__':
                     aPath = fastestPath(agent, treasure, _map, w, h)
                     aPath.pop(0)
                     knowTreasure = True
-
-            if round >= freeRound:
-                prevMove = pirate
-                pirate = path[0]
-                path.pop(0)
-                globals.lst_logs.append(
-                    f"The pirate move to location {(pirate // w, pirate % w)}")
-                # print(f"The pirate move to location {(pirate // w, pirate % w)}")
 
             # Add tab to Visualization
             visualize.addNewTab(_map, round + 1, removedTiles,
