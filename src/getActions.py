@@ -107,7 +107,6 @@ def getActions(_w: int, _h: int, _freed: bool, _canTele: bool, _known: bool, _tr
         # if _pirate == _prevMove: return (0, "large scan", _agent)
         
         tiles = []
-        inRangeOfPirate = []
         xPi = _pirate // _w
         yPi = _pirate % _w
         if _pirate - _prevMove in [1, 2]:  # move right
@@ -115,57 +114,41 @@ def getActions(_w: int, _h: int, _freed: bool, _canTele: bool, _known: bool, _tr
                 for y in range(yPi, _w):
                     if x * _w + y not in _removed:
                         tiles.append(x * _w + y)
-                        if (x - xPi, y - yPi) in [(2, 0), (1, 1), (0, 2), (1, 0), (0, 1), (-1, 0), (-2, 0), (-1, 1)]:
-                            inRangeOfPirate.append(x + _w + y)
         if _pirate - _prevMove in [-1, -2]:  # move left
             for x in range(_h):
                 for y in range(yPi + 1):
                     if x * _w + y not in _removed:
                         tiles.append(x * _w + y)
-                        if (x - xPi, y - yPi) in [(2, 0), (1, -1), (0, 2), (1, 0), (0, -1), (-1, 0), (-2, 0), (-1, -1)]:
-                            inRangeOfPirate.append(x + _w + y)
         if _pirate - _prevMove in [_w, 2*_w]:  # move up
             for x in range(xPi + 1):
                 for y in range(_w):
                     if x * _w + y not in _removed:
                         tiles.append(x * _w + y)
-                        if (x - xPi, y - yPi) in [(-2, 0), (-1, 1), (0, 2), (-1, -1), (0, -2), (-1, 0), (0, 1), (0, -1)]:
-                            inRangeOfPirate.append(x + _w + y)
         if _pirate - _prevMove in [-_w, -2*_w]:  # move down
             for x in range(xPi, _h):
                 for y in range(_w):
                     if x * _w + y not in _removed:
                         tiles.append(x * _w + y)
-                        if (x - xPi, y - yPi) in [(2, 0), (1, 1), (0, 2), (1, -1), (0, -2), (1, 0), (0, 1), (0, -1)]:
-                            inRangeOfPirate.append(x + _w + y)
         if _pirate - _prevMove == _w - 1:  # down left
             for x in range(xPi, _h):
                 for y in range(yPi + 1):
                     if x * _w + y not in _removed:
                         tiles.append(x * _w + y)
-                        if (x - xPi, y - yPi) in [(2, 0), (0, -2), (1, 0), (0, -1), (1, -1)]:
-                            inRangeOfPirate.append(x + _w + y)
         if _pirate - _prevMove == _w + 1:  # down right
             for x in range(xPi, _h):
                 for y in range(yPi, _w):
                     if x * _w + y not in _removed:
                         tiles.append(x * _w + y)
-                        if (x - xPi, y - yPi) in [(2, 0), (0, 2), (1, 0), (0, 1), (1, 1)]:
-                            inRangeOfPirate.append(x + _w + y)
         if _pirate - _prevMove == -_w - 1:  # up left
             for x in range(xPi + 1):
                 for y in range(yPi + 1):
                     if x * _w + y not in _removed:
                         tiles.append(x * _w + y)
-                        if (x - xPi, y - yPi) in [(-2, 0), (0, -2), (-1, 0), (0, -1), (-1, -1)]:
-                            inRangeOfPirate.append(x + _w + y)
         if _pirate - _prevMove == -_w + 1:  # up right
             for x in range(xPi + 1):
                 for y in range(yPi + 1):
                     if x * _w + y not in _removed:
                         tiles.append(x * _w + y)
-                        if (x - xPi, y - yPi) in [(-2, 0), (0, 2), (-1, 0), (0, 1), (-1, 1)]:
-                            inRangeOfPirate.append(x + _w + y)
 
         for i in range(_w * _h):
             if i not in tiles and i != _treasure:
