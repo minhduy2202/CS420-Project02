@@ -1,3 +1,4 @@
+import sv_ttk
 import argparse
 import os
 import re
@@ -75,7 +76,7 @@ if __name__ == '__main__':
         exit()
 
     # inputFilePattern = re.compile('MAP_\d+\.txt')
-    sInputFile = "MAP_04\.txt"
+    sInputFile = "MAP_01\.txt"
     inputFilePattern = re.compile(sInputFile)
     isVisualize = True
 
@@ -109,6 +110,7 @@ if __name__ == '__main__':
             mapSize[0], mapSize[1], treasure, _map)
         w, h = mapSize[0], mapSize[1]
         visualize = Visualization(_map, numOfRegions)
+        
         path.pop(0)
         if pirate == -1:
             globals.lst_logs.append(
@@ -325,7 +327,8 @@ if __name__ == '__main__':
                     break
                 if len(removedTiles) == w * h - 1:
                     aPath = fastestPath(agent, treasure, _map, w, h)
-                    aPath.pop(0)
+                    if aPath:
+                        aPath.pop(0)
                     knowTreasure = True
                 action = getActions(w, h, freed, canTele, knowTreasure, treasure,
                                     agent, pirate, prevMove, removedTiles, hints, _map)
@@ -393,7 +396,8 @@ if __name__ == '__main__':
                     break
                 if len(removedTiles) == w * h - 1:
                     aPath = fastestPath(agent, treasure, _map, w, h)
-                    aPath.pop(0)
+                    if aPath:
+                        aPath.pop(0)
                     knowTreasure = True
 
             # Add tab to Visualization

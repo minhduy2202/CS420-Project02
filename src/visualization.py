@@ -1,9 +1,6 @@
-import tkinter
 import customtkinter as ctk
 from tkinter import *
-import sv_ttk
 import random
-import math
 
 from queue import Queue
 
@@ -26,8 +23,9 @@ _colors = ["steel blue", "tan4", "HotPink4", "burlywood3", "medium sea green", "
 def random_color(nRegions):
     colors = ['blue']
     if nRegions - 1 > len(_colors):
-        for i in range(nRegions - 1):
-            colors.append('#%06X' % random.randint(0, 0xFFFFFF))
+        temp = random.sample(range(0, 0xFFFFFF + 1, 300), k=nRegions - 1)
+        for c in temp:
+            colors.append('#%06X' % c)
     else:
         colors += random.sample(_colors, k=nRegions - 1)
     return colors
@@ -47,7 +45,8 @@ class Visualization:
         self.root.title("Map Visualization")
         self.root.geometry("1600x1000")
         
-        sv_ttk.set_theme("dark")
+        ctk.set_appearance_mode("dark")
+        
         self.tabs = ctk.CTkTabview(self.root)
         self.tabs.pack()
         
@@ -106,8 +105,8 @@ class Visualization:
             for c in range(self.h):
                 cell = r * self.w + c
                 
-                region = int(self.map[r][c][0])
                 cellType = None if self.map[r][c][-1] not in ['M', 'P'] else self.map[r][c][-1]
+                region = int(self.map[r][c]) if cellType is None and 'T' not in self.map[r][c] else int(self.map[r][c][:-1])
                 
                 if r == 0:
                     xcoor.create_text((c + 0.5)*cellWidth,
@@ -130,43 +129,52 @@ class Visualization:
                                         tags="text",
                                         fill="white")
                 if cell in hintTiles:
-                    map.create_rectangle(r * cellWidth,  # x top left corner
-                                            c * cellHeight,  # y top left corner
+                    map.create_rectangle(c * cellWidth, # x top left corner
+                                            r * cellHeight,  # y top left corner
                                             # x bot right corner
-                                            (r+1) * \
+                                            (c+1) * \
                                             cellWidth,
                                             # y bot right corner
-                                            (c+1) * \
+                                            (r+1) * \
                                             cellHeight,
                                             tags="hint",
                                             outline='red',
                                             fill = 'thistle4' if cell in removeTiles and region != 0 else self.colors[region])
                 else:
-                    map.create_rectangle(r * cellWidth,  # x top left corner
-                                            c * cellHeight,  # y top left corner
-                                            # x bot right corner
-                                            (r+1) * \
-                                            cellWidth,
+                    map.create_rectangle(c * cellWidth,  # y top left corner
+                                            r * cellHeight,  # x top left corner
                                             # y bot right corner
                                             (c+1) * \
+                                            cellWidth,
+                                            # x bot right corner
+                                            (r+1) * \
                                             cellHeight,
                                             fill = 'thistle4' if cell in removeTiles and region != 0 else self.colors[region])
                 
                 if region == 0:
-                    map.create_rectangle(r * cellWidth,  # x top left corner
-                                            c * cellHeight,  # y top left corner
-                                            # x bot right corner
-                                            (r+1) * \
-                                            cellWidth,
+                    map.create_rectangle(c * cellWidth,  # y top left corner
+                                            r * cellHeight,  # x top left corner
                                             # y bot right corner
                                             (c+1) * \
                                             cellHeight,
+                                            # x bot right corner
+                                            (r+1) * \
+                                            cellWidth,
                                             tags="water",
                                             fill = self.colors[region])
                 # treasure
                 if treasure == cell:
-                    map.create_text((r+0.5) * cellWidth,
-                                        (c+0.5) * cellHeight,
+                    map.create_rectangle((c+0.15) * cellWidth,
+                                            (r+0.15) * cellHeight,
+                                            (c+0.85) *
+                                            cellWidth,
+                                            (r+0.85) *
+                                            cellHeight,
+                                            tags='agent',
+                                            fill="red")
+                    
+                    map.create_text((c+0.5) * cellWidth,
+                                        (r+0.5) * cellHeight,
                                         text='T',
                                         anchor="center",
                                         font=(
@@ -177,8 +185,8 @@ class Visualization:
                                     )
                 
                 if cellType is not None:
-                    map.create_text((r+0.5) * cellWidth,
-                                        (c+0.5) * cellHeight,
+                    map.create_text((c+0.5) * cellWidth,
+                                        (r+0.5) * cellHeight,
                                         text=cellType,
                                         anchor="center",
                                         font=(
@@ -189,18 +197,17 @@ class Visualization:
                                     )
                 
                 if agent == cell:
-                    map.create_rectangle(r*cellWidth,
+                    map.create_rectangle((c) * cellWidth,
+                                            (r + 0.5) * cellHeight,
                                             (c+0.5) *
-                                            cellHeight,
-                                            (r+0.5) *
                                             cellWidth,
-                                            (c+1) *
+                                            (r + 1) *
                                             cellHeight,
                                             tags='agent',
                                             fill="yellow")
 
-                    map.create_text((r+0.25)*cellWidth,
-                                        (c+0.75) *
+                    map.create_text((c+0.25)*cellWidth,
+                                        (r+0.75) *
                                         cellHeight,
                                         text='A',
                                         anchor="center",
@@ -210,17 +217,17 @@ class Visualization:
                                         fill=charColors['A'])
                 
                 if freed and pirate == cell:
-                    map.create_rectangle((r+0.5)*cellWidth,
-                                            (c + 0.5) * cellHeight,
-                                            (r+1) *
-                                            cellWidth,
+                    map.create_rectangle((c+0.5)*cellWidth,
+                                            (r + 0.5) * cellHeight,
                                             (c+1) *
+                                            cellWidth,
+                                            (r+1) *
                                             cellHeight,
                                             tags='agent',
                                             fill="PaleVioletRed4")
 
-                    map.create_text((r+0.75)*cellWidth,
-                                        (c+0.75) *
+                    map.create_text((c+0.75)*cellWidth,
+                                        (r+0.75) *
                                         cellHeight,
                                         text='Pi',
                                         anchor="center",
