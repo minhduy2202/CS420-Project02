@@ -5,7 +5,7 @@ from preprocessing import preprocessing
 from getActions import getActions
 from get_hint import genHint
 import globals
-from get_visualize import MyVisualization
+from visualization import Visualization
 
 
 def fastestPath(agent: int, treasure: int, _map: list, _w: int, _h: int):
@@ -75,7 +75,7 @@ if __name__ == '__main__':
         exit()
 
     # inputFilePattern = re.compile('MAP_\d+\.txt')
-    sInputFile = "MAP_02\.txt"
+    sInputFile = "MAP_04\.txt"
     inputFilePattern = re.compile(sInputFile)
     isVisualize = True
 
@@ -108,17 +108,20 @@ if __name__ == '__main__':
         agent, pirate, path = preprocessing(
             mapSize[0], mapSize[1], treasure, _map)
         w, h = mapSize[0], mapSize[1]
+        visualize = Visualization(_map, numOfRegions)
         path.pop(0)
         if pirate == -1:
             globals.lst_logs.append(
                 "There does not exist any path from the prisons to treasure.")
             # print("There does not exist any path from the prisons to treasure.")
             continue
-
+        
         # Get Visualization
         if isVisualize:
-            visualize = MyVisualization(
-                _map, numOfRegions, [agent // w, agent % w])
+            # visualize = MyVisualization(
+            #     _map, numOfRegions, [agent // w, agent % w])
+            visualize.createNewTab(0, agent, pirate, treasure, [], [], False, [])
+            
 
         round = 1
         hints = []
@@ -140,6 +143,7 @@ if __name__ == '__main__':
 
         while True:
             globals.lst_logs.append(f"Round {round}")
+            logs = []
             # print(f"Round {round}")
             if round == revealRound:
                 hintWeights = [1, 1, 1, 1, 1, 1, 1,
@@ -147,10 +151,12 @@ if __name__ == '__main__':
 
                 globals.lst_logs.append(
                     f"The location of pirate is {(pirate // w, pirate % w)}.")
+                logs.append(f"The location of pirate is {(pirate // w, pirate % w)}.")
                 # print(f"The location of pirate is {(pirate // w, pirate % w)}.")
             if round == freeRound:
 
                 globals.lst_logs.append("The pirate has been freed.")
+                logs.append("The pirate has been freed.")
                 # print("The pirate has been freed.")
                 freed = True
 
@@ -177,10 +183,11 @@ if __name__ == '__main__':
                 hints.append((hint, round))
 
             # Visualize the hint
-            if isVisualize:
-                visualize.updateHintToTab(_map, round, hint[1], [
-                    agent // w, agent % w], [pirate // w, pirate % w], freed)
+            # if isVisualize:
+            #     # visualize.updateHintToTab(_map, round, hint[1], [
+            #     #     agent // w, agent % w], [pirate // w, pirate % w], freed)
             globals.lst_logs.append("The pirate tells you a hint: " + hint[-1])
+            logs.append("The pirate tells you a hint: " + hint[-1])
             # print("The pirate tells you a hint: " + hint[-1])
 
             if round >= freeRound:
@@ -189,6 +196,7 @@ if __name__ == '__main__':
                 path.pop(0)
                 globals.lst_logs.append(
                     f"The pirate move to location {(pirate // w, pirate % w)}")
+                logs.append(f"The pirate move to location {(pirate // w, pirate % w)}")
                 # print(f"The pirate move to location {(pirate // w, pirate % w)}")
                 
             # getActions
@@ -202,10 +210,12 @@ if __name__ == '__main__':
                     win = True
                     globals.lst_logs.append(
                         f"Teleport to {(agent // w, agent % w)}")
+                    logs.append(f"Teleport to {(agent // w, agent % w)}")
                 if len(aPath) == 0:
                     globals.lst_logs.append(
                         f"Agent large scans at {(agent // w, agent % w)}")
                     win = True
+                    logs.append(f"Agent large scans at {(agent // w, agent % w)}")
                     # print(f"Teleport to {(agent // w, agent % w)}")
                 while cnt < 2 and aPath and not win:
                     xAgent = agent // w
@@ -215,6 +225,7 @@ if __name__ == '__main__':
                             if 0 < x <= h and 0 < y <= w and x*w + y == treasure:
                                 globals.lst_logs.append(
                                     f"Agent large scans at {(xAgent, yAgent)}")
+                                logs.append(f"Agent large scans at {(xAgent, yAgent)}")
                                 # print(f"Agent large scans at {(xAgent, yAgent)}")
                                 win = True
                                 break
@@ -225,6 +236,7 @@ if __name__ == '__main__':
                     if new - agent in [-1, 1, -2, 2, -w, w, -2*w, 2*w]:
                         globals.lst_logs.append(
                             f"Move from {(agent // w, agent % w)} to location {(new // w, new % w)} and scan 3x3 area.")
+                        logs.append(f"Move from {(agent // w, agent % w)} to location {(new // w, new % w)} and scan 3x3 area.")
                         # print(f"Move from {(agent // w, agent % w)} to location {(new // w, new % w)} and scan 3x3 area.")
                         agent += action[2]
                         for i in range(new // w - 1, new // w + 2):
@@ -235,12 +247,14 @@ if __name__ == '__main__':
                     else:
                         globals.lst_logs.append(
                             f"Move from {(agent // w, agent % w)} to location {(new // w, new % w)}")
+                        logs.append(f"Move from {(agent // w, agent % w)} to location {(new // w, new % w)}")
                         # print(f"Move from {(agent // w, agent % w)} to location {(new // w, new % w)}")
                     aPath.pop(0)
                     cnt += 1
                     agent = new
                 if win:
                     globals.lst_logs.append("WIN")
+                    logs.append("WIN")
                     # print("WIN")
                     break
             else:
@@ -252,15 +266,18 @@ if __name__ == '__main__':
 
                     globals.lst_logs.append(
                         f"Teleport to {(agent // w, agent % w)}")
+                    logs.append(f"Teleport to {(agent // w, agent % w)}")
                     # print(f"Teleport to {(agent // w, agent % w)}")
                 if action[1] == "move":
                     globals.lst_logs.append(
                         f"Move from {(agent // w, agent % w)} to location {((agent + action[2]) // w, (agent + action[2]) % w)}")
+                    logs.append(f"Move from {(agent // w, agent % w)} to location {((agent + action[2]) // w, (agent + action[2]) % w)}")
                     # print(f"Move from {(agent // w, agent % w)} to location {((agent + action[2]) // w, (agent + action[2]) % w)}")
                     agent += action[2]
                 if action[1] == "move and small scan":
                     globals.lst_logs.append(
                         f"Move from {(agent // w, agent % w)} to location {((agent + action[2]) // w, (agent + action[2]) % w)} and scan 3x3 area.")
+                    logs.append(f"Move from {(agent // w, agent % w)} to location {((agent + action[2]) // w, (agent + action[2]) % w)} and scan 3x3 area.")
                     # print(f"Move from {(agent // w, agent % w)} to location {((agent + action[2]) // w, (agent + action[2]) % w)} and scan 3x3 area.")
                     agent += action[2]
                     for i in range(agent // w - 1, agent // w + 2):
@@ -275,6 +292,7 @@ if __name__ == '__main__':
 
                     globals.lst_logs.append(
                         f"Agent large scans at {(agent // w, agent % w)}")
+                    logs.append(f"Agent large scans at {(agent // w, agent % w)}")
                     # print(f"Agent large scans at {(agent // w, agent % w)}")
                 if action[1] == "verify":
                     hint, hRound = action[2]
@@ -298,9 +316,11 @@ if __name__ == '__main__':
 
                     globals.lst_logs.append(
                         f"Verify hint at round {hRound}, the hint is " + ("True." if hint[2] else "False."))
+                    logs.append(f"Verify hint at round {hRound}, the hint is " + ("True." if hint[2] else "False."))
                     # print(f"Verify hint at round {hRound}, the hint is " + ("True." if hint[2] else "False."))
                 if treasure in removedTiles:
                     globals.lst_logs.append("WIN")
+                    logs.append("WIN")
                     # print("WIN")
                     break
                 if len(removedTiles) == w * h - 1:
@@ -314,15 +334,18 @@ if __name__ == '__main__':
                     agent = action[2]
                     globals.lst_logs.append(
                         f"Teleport to {(agent // w, agent % w)}")
+                    logs.append(f"Teleport to {(agent // w, agent % w)}")
                     # print(f"Teleport to {(agent // w, agent % w)}")
                 if action[1] == "move":
                     globals.lst_logs.append(
                         f"Move from {(agent // w, agent % w)} to location {((agent + action[2]) // w, (agent + action[2]) % w)}")
+                    logs.append(f"Move from {(agent // w, agent % w)} to location {((agent + action[2]) // w, (agent + action[2]) % w)}")
                     # print(f"Move from {(agent // w, agent % w)} to location {((agent + action[2]) // w, (agent + action[2]) % w)}")
                     agent += action[2]
                 if action[1] == "move and small scan":
                     globals.lst_logs.append(
                         f"Move from {(agent // w, agent % w)} to location {((agent + action[2]) // w, (agent + action[2]) % w)} and scan 3x3 area.")
+                    logs.append(f"Move from {(agent // w, agent % w)} to location {((agent + action[2]) // w, (agent + action[2]) % w)} and scan 3x3 area.")
                     # print(f"Move from {(agent // w, agent % w)} to location {((agent + action[2]) // w, (agent + action[2]) % w)} and scan 3x3 area.")
                     agent += action[2]
                     for i in range(agent // w - 1, agent // w + 2):
@@ -337,6 +360,7 @@ if __name__ == '__main__':
 
                     globals.lst_logs.append(
                         f"Agents large scan at {(agent // w, agent % w)}")
+                    logs.append(f"Agents large scan at {(agent // w, agent % w)}")
                     # print(f"Agents large scan at {(agent // w, agent % w)}")
                 if action[1] == "verify":
                     hint, hRound = action[2]
@@ -360,9 +384,11 @@ if __name__ == '__main__':
 
                     globals.lst_logs.append(
                         f"Verify hint at round {hRound}, the hint is " + ("True." if hint[2] else "False."))
+                    logs.append(f"Verify hint at round {hRound}, the hint is " + ("True." if hint[2] else "False."))
                     # print(f"Verify hint at round {hRound}, the hint is " + ("True." if hint[2] else "False."))
                 if treasure in removedTiles:
                     globals.lst_logs.append("WIN")
+                    logs.append("WIN")
                     # print("WIN")
                     break
                 if len(removedTiles) == w * h - 1:
@@ -372,19 +398,22 @@ if __name__ == '__main__':
 
             # Add tab to Visualization
             if isVisualize:
-                visualize.addNewTab(_map, round + 1, removedTiles,
-                                    [agent // w, agent % w], [pirate // w, pirate % w], freed)
+                # visualize.addNewTab(_map, round + 1, removedTiles,
+                #                     [agent // w, agent % w], [pirate // w, pirate % w], freed)
+                visualize.createNewTab(round, agent, pirate, treasure, hint[1], removedTiles, freed, logs)
 
             final_pirate, final_isPirateFree, final_round, final_removedTiles = pirate, freed, round, removedTiles
+            
+            if pirate == treasure:
+                isWin = False
+                globals.lst_logs.append("LOSE")
+                logs.append("LOSE")
+                # print("LOSE")
+                break
 
             round += 1
             # print('------------------------------------')
             # check finish
-            if pirate == treasure:
-                isWin = False
-                globals.lst_logs.append("LOSE")
-                # print("LOSE")
-                break
 
         # write log to file before visualizing
         writeLog2File(file[4:-4], sLocation="data/output/")
@@ -396,8 +425,10 @@ if __name__ == '__main__':
 
         # show visualization
         if isVisualize:
-            if final_round > 1:
-                visualize.updateLastHintToTab(final_round + 1, final_listOfTilesHint, [
-                    final_agent // w, final_agent % w], [final_pirate // w, final_pirate % w], final_isPirateFree)
+            # if final_round > 1:
+            #     visualize.updateLastHintToTab(final_round + 1, final_listOfTilesHint, [
+            #         final_agent // w, final_agent % w], [final_pirate // w, final_pirate % w], final_isPirateFree)
+            visualize.createNewTab(round, agent, pirate, treasure, hint[1], removedTiles, freed, logs)
             visualize.addLastTab(isWin)
+            
             visualize.showVisualization()
