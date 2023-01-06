@@ -109,23 +109,23 @@ def getActions(_w: int, _h: int, _freed: bool, _canTele: bool, _known: bool, _tr
         tiles = []
         xPi = _pirate // _w
         yPi = _pirate % _w
-        if _pirate - _prevMove in [1, 2]:  # move right
+        if _pirate - _prevMove in [1, 2]: # move right
             for x in range(_h):
                 for y in range(yPi, _w):
                     if x * _w + y not in _removed:
                         tiles.append(x * _w + y)
-        if _pirate - _prevMove in [-1, -2]:  # move left
+        if _pirate - _prevMove in [-1, -2]: # move left
             for x in range(_h):
                 for y in range(yPi + 1):
                     if x * _w + y not in _removed:
                         tiles.append(x * _w + y)
-        if _pirate - _prevMove in [_w, 2*_w]:  # move up
-            for x in range(xPi + 1):
+        if _pirate - _prevMove in [_w, 2*_w]: # move up
+            for x in range(xPi, _h):
                 for y in range(_w):
                     if x * _w + y not in _removed:
                         tiles.append(x * _w + y)
-        if _pirate - _prevMove in [-_w, -2*_w]:  # move down
-            for x in range(xPi, _h):
+        if _pirate - _prevMove in [-_w, -2*_w]:
+            for x in range(xPi + 1): # move down
                 for y in range(_w):
                     if x * _w + y not in _removed:
                         tiles.append(x * _w + y)
