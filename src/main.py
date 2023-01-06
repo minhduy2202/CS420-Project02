@@ -201,6 +201,11 @@ if __name__ == '__main__':
                     f"The pirate move to location {(pirate // w, pirate % w)}")
                 logs.append(
                     f"The pirate move to location {(pirate // w, pirate % w)}")
+                if pirate == treasure:
+                    isWin = False
+                    logs.append("LOSE")
+                    globals.lst_logs.append("LOSE")
+                    break
                 # print(f"The pirate move to location {(pirate // w, pirate % w)}")
 
             # getActions
@@ -447,9 +452,9 @@ if __name__ == '__main__':
             # if final_round > 1:
             #     visualize.updateLastHintToTab(final_round + 1, final_listOfTilesHint, [
             #         final_agent // w, final_agent % w], [final_pirate // w, final_pirate % w], final_isPirateFree)
-            if(isWin):
-                visualize.createNewTab(
-                    round, agent, pirate, treasure, hint[1], removedTiles, freed, logs)
+            # if(isWin):
+            visualize.createNewTab(
+                round, agent, pirate, treasure, hint[1], removedTiles, freed, logs)
             visualize.addLastTab(isWin)
 
             visualize.showVisualization()
