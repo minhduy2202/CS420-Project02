@@ -76,7 +76,7 @@ if __name__ == '__main__':
         exit()
 
     # inputFilePattern = re.compile('MAP_\d+\.txt')
-    sInputFile = "MAP_01\.txt"
+    sInputFile = "MAP_05\.txt"
     inputFilePattern = re.compile(sInputFile)
     isVisualize = True
 
@@ -432,7 +432,8 @@ if __name__ == '__main__':
             # if final_round > 1:
             #     visualize.updateLastHintToTab(final_round + 1, final_listOfTilesHint, [
             #         final_agent // w, final_agent % w], [final_pirate // w, final_pirate % w], final_isPirateFree)
-            visualize.createNewTab(round, agent, pirate, treasure, hint[1], removedTiles, freed, logs)
+            if isWin:
+                visualize.createNewTab(round, agent, pirate, treasure, hint[1], removedTiles, freed, logs)
             visualize.addLastTab(isWin)
             
             visualize.showVisualization()
